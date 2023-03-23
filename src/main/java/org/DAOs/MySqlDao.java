@@ -34,4 +34,20 @@ public class MySqlDao {
         }
         return connection;
     }
+    public void freeConnection(Connection connection) throws DaoException
+    {
+        try
+        {
+            if (connection != null)
+            {
+                connection.close();
+                connection = null;
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Failed to free connection: " + e.getMessage());
+            System.exit(1);
+        }
+    }
 }

@@ -19,4 +19,15 @@ public class Player {
         this.player_draft_year = player_draft_year;
     }
     public Player(){};
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id='" + id + '\'' +
+                ", player_name='" + player_name + '\'' +
+                ", DOB=" + DOB +
+                ", position='" + position + '\'' +
+                ", player_draft_year=" + player_draft_year +
+                '}';
+    }
 }
