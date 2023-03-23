@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PlayerDaoInterface {
     public List<Player> findAllPlayers() throws DaoException;
+    public Player findplayerByID( String playerID) throws DaoException;
 }
