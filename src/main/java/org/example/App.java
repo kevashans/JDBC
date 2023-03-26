@@ -19,7 +19,7 @@ public class App
         Scanner keyboard = new Scanner(System.in);
 
         System.out.println("select feature :");
-        System.out.println("1. find all\n2. find player by id ");
+        System.out.println("1. find all\n2. find player by id\n3. delete player by id ");
         int input1 = keyboard.nextInt();
         if (input1 ==1){
             try {
@@ -32,6 +32,14 @@ public class App
             String inputID = keyboard.next();
             try {
                 System.out.println(IUserDao.findplayerByID(inputID));
+            } catch (DaoException e) {
+                throw new RuntimeException(e);
+            }
+        }else if(input1 ==3){
+            System.out.println("please enter ID: ");
+            String inputID = keyboard.next();
+            try {
+              IUserDao.deleteplayerByID(inputID);
             } catch (DaoException e) {
                 throw new RuntimeException(e);
             }
