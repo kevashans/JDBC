@@ -167,7 +167,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
             //Get connection object using the methods in the super class (MySqlDao.java)...
             connection = this.getConnection();
 
-            String query = "insert into player values(?,?,?,?)";
+            String query = "insert into player values(?,?,?,?,?)";
             ps = connection.prepareStatement(query);
             ps.setString(1, playerData.getId());
             ps.setString(2, playerData.getPlayer_name());
