@@ -3,6 +3,7 @@ package org.DAOs;
 import org.DTOs.Player;
 import org.Exceptions.DaoException;
 
+import java.util.Comparator;
 import java.util.List;
 
 public interface PlayerDaoInterface {
@@ -10,4 +11,5 @@ public interface PlayerDaoInterface {
     public Player findplayerByID( String playerID) throws DaoException;
     public void  deleteplayerByID( String playerID) throws DaoException;
     public void  insertPlayer(Player playerData) throws DaoException;
+    public List<Player> findPlayerUsingFilter( Comparator<Integer> draftyear ) throws DaoException;
 }
