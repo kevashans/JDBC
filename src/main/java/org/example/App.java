@@ -17,13 +17,20 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+
         PlayerDaoInterface userDao = new MySqlPlayerDao();
+        //initialize cache
+        try {
+            userDao.findAllPlayers();
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
+        }
         Scanner keyboard = new Scanner(System.in);
         boolean exit = false;
 
         while (!exit) {
             System.out.println("Select feature:");
-            System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Filter by age\n6. Exit");
+            System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Sort by DraftYear\n6. Exit");
             int input = keyboard.nextInt();
 
             try {
@@ -66,8 +73,8 @@ public class App {
                         break;
 
                     case 5:
-                        System.out.println("enter draft year");
-//                        Comparator<CompDraftYear>;
+//                        System.out.println("enter draft year");
+                        System.out.println(userDao.findPlayerUsingFilter(new CompDraftYear()));
                         break;
 
                     case 6:

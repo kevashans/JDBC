@@ -6,10 +6,11 @@ import org.Exceptions.DaoException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
-
+    private HashSet<String> ids = new HashSet<>();
     @Override
     public List<Player> findAllPlayers() throws DaoException {
         Connection connection = null;
@@ -26,6 +27,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
 
             //Using a PreparedStatement to execute SQL...
             resultSet = ps.executeQuery();
+
             while (resultSet.next()) {
                 String playerId = resultSet.getString("playerID");
                 String playerName = resultSet.getString("player_name");
@@ -40,6 +42,9 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
         } finally {
             closeResources(connection, ps, resultSet);
         }
+        for (int i =0; i< usersList.size();i++){
+            this.ids.add(usersList.get(i).getId());
+        }
         return usersList;     // may be empty
     }
 
@@ -50,7 +55,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
         ResultSet resultSet = null;
 //        List<Player> usersList = new ArrayList<>();
         Player p = null;
-
+        if (this.ids.contains(playerID)){
         try
         {
             //Get connection object using the methods in the super class (MySqlDao.java)...
@@ -61,6 +66,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
             ps.setString( 1,   playerID );
 
             //Using a PreparedStatement to execute SQL...
+
             resultSet = ps.executeQuery();
             while (resultSet.next())
             {
@@ -81,6 +87,9 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
         } finally
         {
             closeResources(connection, ps, resultSet);
+        }
+        }else{
+            throw new DaoException("Player with ID " + playerID + " not found.");
         }
         return p;
 
@@ -160,7 +169,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
             //Get connection object using the methods in the super class (MySqlDao.java)...
             connection = this.getConnection();
 
-            String query = "SELECT * FROM players";
+            String query = "SELECT * FROM player";
             ps = connection.prepareStatement(query);
 
             //Using a PreparedStatement to execute SQL...
