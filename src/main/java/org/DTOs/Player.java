@@ -11,9 +11,18 @@ public class Player {
 
     private int player_draft_year;
 
-
+    private static int idCount;
     public Player(String id, String player_name, Date DOB, String position, int player_draft_year) {
         this.id = id;
+        this.player_name = player_name;
+        this.DOB = DOB;
+        this.position = position;
+        this.player_draft_year = player_draft_year;
+    }
+    public Player(String player_name, Date DOB, String position, int player_draft_year) {
+        idCount++;
+        this.id = "PL"+idCount;
+        System.out.println(idCount);
         this.player_name = player_name;
         this.DOB = DOB;
         this.position = position;

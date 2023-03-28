@@ -1,11 +1,13 @@
 package org.example;        // Feb 2022
 
+import org.Comparator.CompDraftYear;
 import org.DAOs.MySqlPlayerDao;
 import org.DAOs.PlayerDaoInterface;
 import org.DTOs.Player;
 import org.Exceptions.DaoException;
 
 import java.sql.*;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -13,66 +15,79 @@ import java.util.Scanner;
  * This program simply attempts to connect to a database - but does nothing else.
  */
 
-public class App
-{
+public class App {
     public static void main(String[] args) {
-        PlayerDaoInterface IUserDao = new MySqlPlayerDao();
+        PlayerDaoInterface userDao = new MySqlPlayerDao();
         Scanner keyboard = new Scanner(System.in);
+        boolean exit = false;
 
-        System.out.println("select feature :");
-        System.out.println("1. find all\n2. find player by id\n3. delete player by id\n4. add player ");
-        int input1 = keyboard.nextInt();
-        if (input1 ==1){
-            try {
-                System.out.println(IUserDao.findAllPlayers());
-            } catch (DaoException e) {
-                throw new RuntimeException(e);
-            }
-        }else if(input1 ==2){
-            System.out.println("please enter ID: ");
-            String inputID = keyboard.next();
-            try {
-                System.out.println(IUserDao.findplayerByID(inputID));
-            } catch (DaoException e) {
-                throw new RuntimeException(e);
-            }
-        }else if(input1 ==3){
-            System.out.println("please enter ID: ");
-            String inputID = keyboard.next();
-            try {
-              IUserDao.deleteplayerByID(inputID);
-            } catch (DaoException e) {
-                throw new RuntimeException(e);
-            }
-        }else if(input1 ==4){
-            System.out.println("please enter ID: ");
-            String playerId;
-            String playerName;
-            String playerBirthDate;
-            String position;
-            int draftYear;
-            System.out.println("enter ID: ");
-            playerId = keyboard.next();
-            System.out.println("enter name: ");
-            playerName = keyboard.next();
-            System.out.println("enter DOB: ");
-            playerBirthDate = keyboard.next();
-            System.out.println("enter position");
-            position = keyboard.next();
-            System.out.println("enter draft year");
-            draftYear = keyboard.nextInt();
+        while (!exit) {
+            System.out.println("Select feature:");
+            System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Filter by age\n6. Exit");
+            int input = keyboard.nextInt();
 
-            Date date=Date.valueOf(playerBirthDate);
-
-            Player inputPlayer = new Player(playerId,playerName,date,position,draftYear);
             try {
-                IUserDao.insertPlayer(inputPlayer);
+                switch (input) {
+                    case 1:
+                        System.out.println(userDao.findAllPlayers());
+                        break;
+
+                    case 2:
+                        System.out.println("Please enter ID: ");
+                        String inputID = keyboard.next();
+                        System.out.println(userDao.findplayerByID(inputID));
+                        break;
+
+                    case 3:
+                        System.out.println("Please enter ID: ");
+                        inputID = keyboard.next();
+                        userDao.deleteplayerByID(inputID);
+                        break;
+
+                    case 4:
+                        String playerName;
+                        String playerBirthDate;
+                        String position;
+                        int draftYear;
+
+                        System.out.println("Enter name: ");
+                        playerName = keyboard.next();
+                        System.out.println("Enter DOB (YYYY-MM-DD): ");
+                        playerBirthDate = keyboard.next();
+                        System.out.println("Enter position: ");
+                        position = keyboard.next();
+                        System.out.println("Enter draft year: ");
+                        draftYear = keyboard.nextInt();
+
+                        Date date = Date.valueOf(playerBirthDate);
+
+                        Player inputPlayer = new Player(playerName, date, position, draftYear);
+                        userDao.insertPlayer(inputPlayer);
+                        break;
+
+                    case 5:
+                        System.out.println("enter draft year");
+//                        Comparator<CompDraftYear>;
+                        break;
+
+                    case 6:
+                        exit = true;
+                        break;
+
+                    default:
+                        System.out.println("Invalid input. Please try again.");
+                        break;
+                }
             } catch (DaoException e) {
-                throw new RuntimeException(e);
+                System.err.println("Error: " + e.getMessage());
+            } catch (SQLException e) {
+                System.err.println("Error executing SQL statement: " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.err.println("Invalid input: " + e.getMessage());
+            } catch (Exception e) {
+                System.err.println("Unknown error: " + e.getMessage());
+                System.out.println(e);
             }
         }
-
-
     }
 }
-

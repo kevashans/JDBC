@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
-    private static int idCount =6;
+
     @Override
     public List<Player> findAllPlayers() throws DaoException {
         Connection connection = null;
@@ -36,21 +36,9 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
                 usersList.add(u);
             }
         } catch (SQLException e) {
-            throw new DaoException("findAllPlayeresultSet() " + e.getMessage());
+            throw new DaoException(e.getMessage());
         } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (connection != null) {
-                    freeConnection(connection);
-                }
-            } catch (SQLException e) {
-                throw new DaoException("findAllUsers() " + e.getMessage());
-            }
+            closeResources(connection, ps, resultSet);
         }
         return usersList;     // may be empty
     }
@@ -61,7 +49,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
         PreparedStatement ps = null;
         ResultSet resultSet = null;
 //        List<Player> usersList = new ArrayList<>();
-        Player p = new Player();
+        Player p = null;
 
         try
         {
@@ -70,7 +58,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
 
             String query = "SELECT * FROM player WHERE playerID LIKE ?";
             ps = connection.prepareStatement(query);
-            ps.setString( 1, "%" + playerID + "%" );
+            ps.setString( 1,   playerID );
 
             //Using a PreparedStatement to execute SQL...
             resultSet = ps.executeQuery();
@@ -84,29 +72,15 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
                 p = new Player(playerId, playerName, DOB, position, draftYear);
 //                usersList.add(u);
             }
+            if (p == null) {
+                throw new DaoException("Player with ID " + playerID + " not found.");
+            }
         } catch (SQLException e)
         {
-            throw new DaoException("findAllUseresultSet() " + e.getMessage());
+            throw new DaoException(e.getMessage());
         } finally
         {
-            try
-            {
-                if (resultSet != null)
-                {
-                    resultSet.close();
-                }
-                if (ps != null)
-                {
-                    ps.close();
-                }
-                if (connection != null)
-                {
-                    freeConnection(connection);
-                }
-            } catch (SQLException e)
-            {
-                throw new DaoException("findAllUsers() " + e.getMessage());
-            }
+            closeResources(connection, ps, resultSet);
         }
         return p;
 
@@ -116,6 +90,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
     public void deleteplayerByID(String playerID) throws DaoException {
         Connection connection = null;
         PreparedStatement ps = null;
+//        ResultSet resultSet = null;
         int resultSet =0;
         List<Player> usersList = new ArrayList<>();
 
@@ -134,23 +109,10 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
             System.out.println(resultSet);
         } catch (SQLException e)
         {
-            throw new DaoException("findAllUseresultSet() " + e.getMessage());
+            throw new DaoException( e.getMessage());
         } finally
         {
-            try
-            {
-                if (ps != null)
-                {
-                    ps.close();
-                }
-                if (connection != null)
-                {
-                    freeConnection(connection);
-                }
-            } catch (SQLException e)
-            {
-                throw new DaoException("findAllUsers() " + e.getMessage());
-            }
+            closeResourcesNoResultSet(connection, ps);
         }
 //        return usersList;
     }
@@ -160,8 +122,6 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
         Connection connection = null;
         PreparedStatement ps = null;
         int resultSet =0;
-        List<Player> usersList = new ArrayList<>();
-
 
         try
         {
@@ -181,40 +141,28 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
             System.out.println(resultSet);
         } catch (SQLException e)
         {
-            throw new DaoException("findAllUseresultSet() " + e.getMessage());
+            throw new DaoException(e.getMessage());
         } finally
         {
-            try
-            {
-                if (ps != null)
-                {
-                    ps.close();
-                }
-                if (connection != null)
-                {
-                    freeConnection(connection);
-                }
-            } catch (SQLException e)
-            {
-                throw new DaoException("findAllUsers() " + e.getMessage());
-            }
+            closeResourcesNoResultSet(connection, ps);
         }
+
     }
 
     @Override
-    public List<Player> findPlayerUsingFilter(Comparator<Integer> draftyear) throws DaoException {
+    public List<Player> findPlayerUsingFilter(Comparator<Player> playerAgeComparator) throws DaoException {
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet resultSet = null;
-        List<Player> usersList = new ArrayList<>();
+        List<Player> playerList = new ArrayList<>();
 
         try {
             //Get connection object using the methods in the super class (MySqlDao.java)...
             connection = this.getConnection();
 
-            String query = "SELECT * FROM players WHERE player_draft_year > ? ORDER BY player_draft_year";
+            String query = "SELECT * FROM players";
             ps = connection.prepareStatement(query);
-            ps.setInt(1, draftyear.compare(0, 0));
+
             //Using a PreparedStatement to execute SQL...
             resultSet = ps.executeQuery();
             while (resultSet.next()) {
@@ -223,28 +171,20 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
                 Date DOB = resultSet.getDate("player_birth_date");
                 String position = resultSet.getString("position");
                 int draftYear = resultSet.getInt("player_draft_year");
-                Player u = new Player(playerId, playerName, DOB, position, draftYear);
-                usersList.add(u);
+                Player player = new Player(playerId, playerName, DOB, position, draftYear);
+                playerList.add(player);
             }
         } catch (SQLException e) {
-            throw new DaoException("findAllPlayeresultSet() " + e.getMessage());
+            throw new DaoException( e.getMessage());
         } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (connection != null) {
-                    freeConnection(connection);
-                }
-            } catch (SQLException e) {
-                throw new DaoException("findAllUsers() " + e.getMessage());
-            }
+            closeResources(connection, ps, resultSet);
         }
-        return usersList;
+
+        playerList.sort(playerAgeComparator); // sort the player list based on the given comparator
+
+        return playerList;
     }
+
 
 }
 

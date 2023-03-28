@@ -4,7 +4,9 @@ import org.Exceptions.DaoException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.*;
 
 
 public class MySqlDao {
@@ -50,4 +52,34 @@ public class MySqlDao {
             System.exit(1);
         }
     }
+
+    public void closeResources(Connection connection, PreparedStatement ps, ResultSet resultSet) throws DaoException {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (connection != null) {
+                freeConnection(connection);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Error occurred while closing resources: " + e.getMessage());
+        }
+    }
+    public void closeResourcesNoResultSet(Connection connection, PreparedStatement ps) throws DaoException {
+        try {
+
+            if (ps != null) {
+                ps.close();
+            }
+            if (connection != null) {
+                freeConnection(connection);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Error occurred while closing resources: " + e.getMessage());
+        }
+    }
+
 }
