@@ -1,12 +1,18 @@
 package org.example;        // Feb 2022
 
+//import com.sun.tools.javac.code.Attribute;
 import org.Comparator.CompDraftYear;
 import org.DAOs.MySqlPlayerDao;
 import org.DAOs.PlayerDaoInterface;
 import org.DTOs.Player;
 import org.Exceptions.DaoException;
+import org.enums;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
 
@@ -16,12 +22,33 @@ import java.util.Scanner;
  */
 
 public class App {
+
+    public static void print(){
+    PrintWriter printer = null;
+        try {
+            printer = new PrintWriter(new File("idTracker.txt"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        printer.print(Player.getIdCount());
+        printer.close();
+    }
+
+
+
+    public static <E extends Enum<E>> boolean isInEnum(String value, Class<E> enumClass) {
+        for (E e : enumClass.getEnumConstants()) {
+            if(e.name().equals(value)) { return true; }
+        }
+        return false;
+    }
     public static void main(String[] args) {
 
         PlayerDaoInterface userDao = new MySqlPlayerDao();
         //initialize cache
         try {
             userDao.findAllPlayers();
+            userDao.updateId();
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
@@ -52,17 +79,21 @@ public class App {
                         break;
 
                     case 4:
+
                         String playerName;
                         String playerBirthDate;
-                        String position;
+                        String position = null;
                         int draftYear;
 
                         System.out.println("Enter name: ");
                         playerName = keyboard.next();
                         System.out.println("Enter DOB (YYYY-MM-DD): ");
                         playerBirthDate = keyboard.next();
-                        System.out.println("Enter position: ");
-                        position = keyboard.next();
+
+                        while(!isInEnum(position, enums.positions.class)){
+                            System.out.println("Enter position: ");
+                            position = keyboard.next();
+                        }
                         System.out.println("Enter draft year: ");
                         draftYear = keyboard.nextInt();
 
@@ -78,6 +109,7 @@ public class App {
                         break;
 
                     case 6:
+                        print();
                         exit = true;
                         break;
 

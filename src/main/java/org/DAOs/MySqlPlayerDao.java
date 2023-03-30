@@ -9,8 +9,17 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
+
 public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
     private HashSet<String> ids = new HashSet<>();
+
+
+    public void updateId(){
+        ArrayList<Integer> ids = readIds();
+        if (ids.get(0)!= null){
+            Player.setIdCount(ids.get(0));
+        }
+    }
     @Override
     public List<Player> findAllPlayers() throws DaoException {
         Connection connection = null;

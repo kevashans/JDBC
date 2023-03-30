@@ -12,4 +12,6 @@ public interface PlayerDaoInterface {
     public void  deleteplayerByID( String playerID) throws DaoException;
     public void  insertPlayer(Player playerData) throws DaoException;
     public List<Player> findPlayerUsingFilter( Comparator<Player> comparator ) throws DaoException;
+
+    void updateId();
 }

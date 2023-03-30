@@ -2,12 +2,16 @@ package org.DAOs;
 
 import org.Exceptions.DaoException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 
 
 public class MySqlDao {
@@ -82,5 +86,22 @@ public class MySqlDao {
             throw new DaoException("Error occurred while closing resources: " + e.getMessage());
         }
     }
+    public static ArrayList<Integer> readIds(){
+        File inputFile = new File("idTracker.txt");
+        ArrayList<Integer> IDs = new ArrayList<>();
+        Scanner file;
+        int playerID = 0;
+        try {
+            file = new Scanner(inputFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        while (file.hasNext()) {
+            playerID = file.nextInt();
+        }
+        IDs.add(0,playerID);
+        return IDs;
+    }
+
 
 }

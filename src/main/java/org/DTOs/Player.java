@@ -34,6 +34,14 @@ public class Player {
         return id;
     }
 
+    public static int getIdCount() {
+        return idCount;
+    }
+
+    public static void setIdCount(int idCount) {
+        Player.idCount = idCount;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
