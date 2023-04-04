@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import com.google.gson.Gson;
+
 
 
 public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
@@ -201,6 +203,24 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
         playerList.sort(playerAgeComparator); // sort the player list based on the given comparator
 
         return playerList;
+    }
+
+    @Override
+    public String findAllPlayersJson() throws DaoException {
+        String json;
+        Gson gsonParser = new Gson();
+        List<Player>players = findAllPlayers();
+        json = gsonParser.toJson(players);
+        return json;
+
+    }
+
+    @Override
+    public String findPlayerByIdJson(String id) throws DaoException {
+        Player p = findplayerByID(id);
+        Gson gsonParser = new Gson();
+        String json = gsonParser.toJson(p);
+        return json;
     }
 
 

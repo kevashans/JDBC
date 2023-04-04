@@ -57,7 +57,7 @@ public class App {
 
         while (!exit) {
             System.out.println("Select feature:");
-            System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Sort by DraftYear\n6. Exit");
+            System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Sort by DraftYear\n6. Find all(Json)\n7. Exit");
             int input = keyboard.nextInt();
 
             try {
@@ -109,6 +109,9 @@ public class App {
                         break;
 
                     case 6:
+                        System.out.println(userDao.findAllPlayersJson());
+
+                    case 7:
                         print();
                         exit = true;
                         break;
