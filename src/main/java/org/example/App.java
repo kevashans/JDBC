@@ -47,7 +47,7 @@ public class App {
         PlayerDaoInterface userDao = new MySqlPlayerDao();
         //initialize cache
         try {
-            userDao.findAllPlayers();
+            userDao.initializeID();
             userDao.updateId();
         } catch (DaoException e) {
             throw new RuntimeException(e);
@@ -57,7 +57,7 @@ public class App {
 
         while (!exit) {
             System.out.println("Select feature:");
-            System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Sort by DraftYear\n6. Find all(Json)\n7. Exit");
+            System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Sort by DraftYear\n6. Find all(JSON)\n7. Find by ID (JSON)\n8. Exit");
             int input = keyboard.nextInt();
 
             try {
@@ -110,8 +110,13 @@ public class App {
 
                     case 6:
                         System.out.println(userDao.findAllPlayersJson());
+                        break;
 
                     case 7:
+                        System.out.println("Please enter ID: ");
+                        inputID = keyboard.next();
+                        System.out.println(userDao.findplayerByID(inputID));
+                    case 8:
                         print();
                         exit = true;
                         break;

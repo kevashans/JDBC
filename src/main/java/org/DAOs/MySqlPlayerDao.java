@@ -22,6 +22,13 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
             Player.setIdCount(ids.get(0));
         }
     }
+
+    public void initializeID() throws DaoException {
+        List<Player> players = findAllPlayers();
+        for(int i=0;i<players.size();i++){
+            this.ids.add(players.get(i).getId());
+        }
+    }
     @Override
     public List<Player> findAllPlayers() throws DaoException {
         Connection connection = null;
@@ -52,9 +59,6 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
             throw new DaoException(e.getMessage());
         } finally {
             closeResources(connection, ps, resultSet);
-        }
-        for (int i =0; i< usersList.size();i++){
-            this.ids.add(usersList.get(i).getId());
         }
         return usersList;     // may be empty
     }
