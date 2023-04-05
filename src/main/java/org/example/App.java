@@ -3,7 +3,9 @@ package org.example;        // Feb 2022
 //import com.sun.tools.javac.code.Attribute;
 import org.Comparator.CompDraftYear;
 import org.DAOs.MySqlPlayerDao;
+import org.DAOs.MySqlScoutDao;
 import org.DAOs.PlayerDaoInterface;
+import org.DAOs.ScoutDaoInterface;
 import org.DTOs.Player;
 import org.Exceptions.DaoException;
 import org.enums;
@@ -45,9 +47,11 @@ public class App {
     public static void main(String[] args) {
 
         PlayerDaoInterface userDao = new MySqlPlayerDao();
+        ScoutDaoInterface scoutDao = new MySqlScoutDao();
         //initialize cache
         try {
             userDao.initializeID();
+            scoutDao.initializeID();
             userDao.updateId();
         } catch (DaoException e) {
             throw new RuntimeException(e);
@@ -56,84 +60,122 @@ public class App {
         boolean exit = false;
 
         while (!exit) {
-            System.out.println("Select feature:");
-            System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Sort by DraftYear\n6. Find all(JSON)\n7. Find by ID (JSON)\n8. Exit");
-            int input = keyboard.nextInt();
+            System.out.println("Select Table: \n1.Player\n2.Scout");
+            int input0 = keyboard.nextInt();
 
-            try {
-                switch (input) {
-                    case 1:
-                        System.out.println(userDao.findAllPlayers());
-                        break;
+            if(input0==1) {
+                System.out.println("Select feature:");
+                System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Sort by DraftYear\n6. Find all(JSON)\n7. Find by ID (JSON)\n8. Exit");
+                int input = keyboard.nextInt();
 
-                    case 2:
-                        System.out.println("Please enter ID: ");
-                        String inputID = keyboard.next();
-                        System.out.println(userDao.findplayerByID(inputID));
-                        break;
+                try {
+                    switch (input) {
+                        case 1:
+                            System.out.println(userDao.findAllPlayers());
+                            break;
 
-                    case 3:
-                        System.out.println("Please enter ID: ");
-                        inputID = keyboard.next();
-                        userDao.deleteplayerByID(inputID);
-                        break;
+                        case 2:
+                            System.out.println("Please enter ID: ");
+                            String inputID = keyboard.next();
+                            System.out.println(userDao.findplayerByID(inputID));
+                            break;
 
-                    case 4:
+                        case 3:
+                            System.out.println("Please enter ID: ");
+                            inputID = keyboard.next();
+                            userDao.deleteplayerByID(inputID);
+                            break;
 
-                        String playerName;
-                        String playerBirthDate;
-                        String position = null;
-                        int draftYear;
+                        case 4:
 
-                        System.out.println("Enter name: ");
-                        playerName = keyboard.next();
-                        System.out.println("Enter DOB (YYYY-MM-DD): ");
-                        playerBirthDate = keyboard.next();
+                            String playerName;
+                            String playerBirthDate;
+                            String position = null;
+                            int draftYear;
 
-                        while(!isInEnum(position, enums.positions.class)){
-                            System.out.println("Enter position: ");
-                            position = keyboard.next();
-                        }
-                        System.out.println("Enter draft year: ");
-                        draftYear = keyboard.nextInt();
+                            System.out.println("Enter name: ");
+                            playerName = keyboard.next();
+                            System.out.println("Enter DOB (YYYY-MM-DD): ");
+                            playerBirthDate = keyboard.next();
 
-                        Date date = Date.valueOf(playerBirthDate);
+                            while (!isInEnum(position, enums.positions.class)) {
+                                System.out.println("Enter position: ");
+                                position = keyboard.next();
+                            }
+                            System.out.println("Enter draft year: ");
+                            draftYear = keyboard.nextInt();
 
-                        Player inputPlayer = new Player(playerName, date, position, draftYear);
-                        userDao.insertPlayer(inputPlayer);
-                        break;
+                            Date date = Date.valueOf(playerBirthDate);
 
-                    case 5:
+                            Player inputPlayer = new Player(playerName, date, position, draftYear);
+                            userDao.insertPlayer(inputPlayer);
+                            break;
+
+                        case 5:
 //                        System.out.println("enter draft year");
-                        System.out.println(userDao.findPlayerUsingFilter(new CompDraftYear()));
-                        break;
+                            System.out.println(userDao.findPlayerUsingFilter(new CompDraftYear()));
+                            break;
 
-                    case 6:
-                        System.out.println(userDao.findAllPlayersJson());
-                        break;
+                        case 6:
+                            System.out.println(userDao.findAllPlayersJson());
+                            break;
 
-                    case 7:
-                        System.out.println("Please enter ID: ");
-                        inputID = keyboard.next();
-                        System.out.println(userDao.findplayerByID(inputID));
-                    case 8:
-                        print();
-                        exit = true;
-                        break;
+                        case 7:
+                            System.out.println("Please enter ID: ");
+                            inputID = keyboard.next();
+                            System.out.println(userDao.findplayerByID(inputID));
+                        case 8:
+                            print();
+                            exit = true;
+                            break;
 
-                    default:
-                        System.out.println("Invalid input. Please try again.");
-                        break;
+                        default:
+                            System.out.println("Invalid input. Please try again.");
+                            break;
+                    }
+                } catch (DaoException e) {
+                    System.err.println("Error: " + e.getMessage());
+                } catch (SQLException e) {
+                    System.err.println("Error executing SQL statement: " + e.getMessage());
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Invalid input: " + e.getMessage());
+                } catch (Exception e) {
+                    System.err.println("Unknown error: " + e.getMessage());
+                    System.out.println(e);
                 }
-            } catch (DaoException e) {
-                System.err.println("Error: " + e.getMessage());
-            } catch (SQLException e) {
-                System.err.println("Error executing SQL statement: " + e.getMessage());
-            } catch (IllegalArgumentException e) {
-                System.err.println("Invalid input: " + e.getMessage());
-            } catch (Exception e) {
-                System.err.println("Unknown error: " + e.getMessage());
-                System.out.println(e);
+            }else if(input0 == 2){
+                System.out.println("select feature");
+                System.out.println("1. Find all scouts\n2. Find scout by ID\n3. Delete scout by ID");
+                int input1 = keyboard.nextInt();
+                try{
+                    switch (input1) {
+                        case 1:
+                            System.out.println( scoutDao.findAllScouts());
+                            break;
+                        case 2:
+                            System.out.println("Please enter ID");
+                            String id = keyboard.next();
+                            System.out.println(scoutDao.findScoutByID(id));
+                            break;
+                        case 3 :
+                            System.out.println("Please enter ID");
+                            String deleteid = keyboard.next();
+                            scoutDao.deleteScoutByID(deleteid);
+
+
+
+                    }
+                }catch (DaoException e) {
+                    System.err.println("Error: " + e.getMessage());
+                } catch (SQLException e) {
+                    System.err.println("Error executing SQL statement: " + e.getMessage());
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Invalid input: " + e.getMessage());
+                } catch (Exception e) {
+                    System.err.println("Unknown error: " + e.getMessage());
+                    System.out.println(e);
+                }
+
             }
         }
     }
