@@ -149,11 +149,11 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
             //Get connection object using the methods in the super class (MySqlDao.java)...
             connection = this.getConnection();
 
-            String query = "insert into player values(?,?,?,?,?)";
+            String query = "insert into scout values(?,?)";
             ps = connection.prepareStatement(query);
-            ps.setString(1, playerData.getId());
-            ps.setString(2, playerData.getScout_name());
-            ps.setString(3, playerData.getDOB());
+//            ps.setString(1, playerData.getId());
+            ps.setString(1, playerData.getScout_name());
+            ps.setString(2, playerData.getDOB());
 //            ps.setString(4, playerData.getPosition());
 //            ps.setString(5, String.valueOf(playerData.getPlayer_draft_year()));
 

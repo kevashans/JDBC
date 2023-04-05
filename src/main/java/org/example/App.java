@@ -7,6 +7,7 @@ import org.DAOs.MySqlScoutDao;
 import org.DAOs.PlayerDaoInterface;
 import org.DAOs.ScoutDaoInterface;
 import org.DTOs.Player;
+import org.DTOs.Scout;
 import org.Exceptions.DaoException;
 import org.enums;
 
@@ -145,7 +146,7 @@ public class App {
                 }
             }else if(input0 == 2){
                 System.out.println("select feature");
-                System.out.println("1. Find all scouts\n2. Find scout by ID\n3. Delete scout by ID");
+                System.out.println("1. Find all scouts\n2. Find scout by ID\n3. Delete scout by ID\n4. Insert scout");
                 int input1 = keyboard.nextInt();
                 try{
                     switch (input1) {
@@ -158,9 +159,21 @@ public class App {
                             System.out.println(scoutDao.findScoutByID(id));
                             break;
                         case 3 :
-                            System.out.println("Please enter ID");
+                            System.out.println("Please enter ID:");
                             String deleteid = keyboard.next();
                             scoutDao.deleteScoutByID(deleteid);
+                        case 4:
+//                            System.out.println("Please enter ID:");
+//                            String inputID = keyboard.next();
+                            System.out.println("Please enter name:");
+                            String inputName = keyboard.next();
+                            System.out.println("Please enter birth date (YYYY-MM-DD):");
+                            String inputDOB = keyboard.next();
+
+                            Date date = Date.valueOf(inputDOB);
+
+                            Scout s = new Scout(inputName,date);
+                            scoutDao.insertScout(s);
 
 
 
