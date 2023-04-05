@@ -13,9 +13,9 @@ public interface ScoutDaoInterface {
     public Scout findScoutByID( String playerID) throws DaoException;
     public void  deleteScoutByID( String playerID) throws DaoException;
     public void  insertScout(Scout playerData) throws DaoException;
-    public List<Player> findScoutUsingFilter( Comparator<Player> comparator ) throws DaoException;
+    public List<Scout> findScoutUsingFilter( Comparator<Scout> comparator ) throws DaoException;
     public String findAllScoutsJson() throws DaoException;
     public String  findScoutByIdJson(String id) throws DaoException;
 
-    void updateId();
+
 }

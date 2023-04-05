@@ -1,6 +1,7 @@
 package org.example;        // Feb 2022
 
 //import com.sun.tools.javac.code.Attribute;
+import org.Comparator.CompDOB;
 import org.Comparator.CompDraftYear;
 import org.DAOs.MySqlPlayerDao;
 import org.DAOs.MySqlScoutDao;
@@ -146,7 +147,7 @@ public class App {
                 }
             }else if(input0 == 2){
                 System.out.println("select feature");
-                System.out.println("1. Find all scouts\n2. Find scout by ID\n3. Delete scout by ID\n4. Insert scout");
+                System.out.println("1. Find all scouts\n2. Find scout by ID\n3. Delete scout by ID\n4. Insert scout\n5. Sort by DOB\n6. Find all(JSON)\n7. Find by ID (JSON)\n8. Exit");
                 int input1 = keyboard.nextInt();
                 try{
                     switch (input1) {
@@ -175,6 +176,19 @@ public class App {
                             Scout s = new Scout(inputName,date);
                             scoutDao.insertScout(s);
 
+                        case 5:
+                            System.out.println(scoutDao.findScoutUsingFilter(new CompDOB()));
+                            break;
+
+                        case 6:
+                            System.out.println(scoutDao.findAllScoutsJson());
+                            break;
+
+                        case 7:
+                            System.out.println("Please enter ID");
+                            String idJson = keyboard.next();
+                            System.out.println(scoutDao.findScoutByIdJson(idJson));
+                            break;
 
 
                     }

@@ -17,12 +17,7 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
     private HashSet<String> ids = new HashSet<>();
 
 
-    public void updateId(){
-        ArrayList<Integer> ids = readIds();
-        if (ids.get(0)!= null){
-            Player.setIdCount(ids.get(0));
-        }
-    }
+
 
     public void initializeID() throws DaoException {
         List<Scout> scouts = findAllScouts();
@@ -91,7 +86,7 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
 
                 }
                 if (s == null) {
-                    throw new DaoException("Player with ID " + scoutID + " not found.");
+                    throw new DaoException("Scout with ID " + scoutID + " not found.");
                 }
             } catch (SQLException e)
             {
@@ -101,7 +96,7 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
                 closeResources(connection, ps, resultSet);
             }
         }else{
-            throw new DaoException("Player with ID " + scoutID + " not found.");
+            throw new DaoException("Scout with ID " + scoutID + " not found.");
         }
         return s;
 
@@ -149,7 +144,7 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
             //Get connection object using the methods in the super class (MySqlDao.java)...
             connection = this.getConnection();
 
-            String query = "insert into scout values(?,?)";
+            String query = "insert into scout(scout_name,scout_birth_date) values(?,?)";
             ps = connection.prepareStatement(query);
 //            ps.setString(1, playerData.getId());
             ps.setString(1, playerData.getScout_name());
@@ -171,47 +166,44 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
     }
 
     @Override
-    public List<Player> findScoutUsingFilter(Comparator<Player> playerAgeComparator) throws DaoException {
+    public List<Scout> findScoutUsingFilter(Comparator<Scout> playerAgeComparator) throws DaoException {
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet resultSet = null;
-        List<Player> playerList = new ArrayList<>();
+        List<Scout> scoutList = new ArrayList<>();
 
         try {
             //Get connection object using the methods in the super class (MySqlDao.java)...
             connection = this.getConnection();
 
-            String query = "SELECT * FROM player";
+            String query = "SELECT * FROM scout";
             ps = connection.prepareStatement(query);
 
             //Using a PreparedStatement to execute SQL...
             resultSet = ps.executeQuery();
             while (resultSet.next()) {
-                String playerId = resultSet.getString("playerID");
-                String playerName = resultSet.getString("player_name");
-                Date DOB = resultSet.getDate("player_birth_date");
-                String position = resultSet.getString("position");
-                int draftYear = resultSet.getInt("player_draft_year");
-                Player player = new Player(playerId, playerName, DOB, position, draftYear);
-                playerList.add(player);
+                String scoutID = resultSet.getString("scoutID");
+                String scoutName = resultSet.getString("scout_name");
+                Date DOB = resultSet.getDate("scout_birth_date");
+                Scout s = new Scout(scoutID,scoutName,DOB);
+                scoutList.add(s);
             }
         } catch (SQLException e) {
             throw new DaoException( e.getMessage());
         } finally {
             closeResources(connection, ps, resultSet);
         }
+        scoutList.sort(playerAgeComparator); // sort the player list based on the given comparator
 
-        playerList.sort(playerAgeComparator); // sort the player list based on the given comparator
-
-        return playerList;
+        return scoutList;
     }
 
     @Override
     public String findAllScoutsJson() throws DaoException {
         String json;
         Gson gsonParser = new Gson();
-        List<Scout>players = findAllScouts();
-        json = gsonParser.toJson(players);
+        List<Scout>scouts = findAllScouts();
+        json = gsonParser.toJson(scouts);
         return json;
 
     }
