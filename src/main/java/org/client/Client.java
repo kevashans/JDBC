@@ -19,6 +19,8 @@ package org.client;
  */
 
 
+import com.google.gson.Gson;
+import org.DTOs.Player;
 import org.core.Packet;
 
 import java.io.IOException;
@@ -57,9 +59,12 @@ public class Client
 
 
             ////SERVER REPLY
-
+            if (command.startsWith("FIND_PLAYER_BY_ID"))
+            {
                 String input = socketReader.nextLine();
-                System.out.println("Client message: Response from server: \"" + input + "\"");
+                Player p3 = new Gson().fromJson(input, Player.class);
+                System.out.println("Client message: Response from server: \"" + p3+ "\"");
+            }
 
 
             socketWriter.close();

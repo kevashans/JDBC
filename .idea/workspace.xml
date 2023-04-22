@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0b48e36-c5c5-4071-8b0c-e90a0be0b913" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/TEST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/server/FindPLayerByID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/FindPLayerByID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/server/Server$ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/Server$ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/Server.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,5 +140,10 @@
       <updated>1677583231542</updated>
     </task>
     <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/JDBC$Client.ic" NAME="Client Coverage Results" MODIFIED="1682184714712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.client.*</FILTER>
+    </SUITE>
   </component>
 </project>

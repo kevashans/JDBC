@@ -24,7 +24,9 @@ public class FindPLayerByID implements Command{
             throw new RuntimeException(e);
         }
 
+
         return new Packet(incomingPacket.getCommand(), existingPlayer);
+
 
     }
 }
