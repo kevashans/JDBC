@@ -9,14 +9,16 @@ public class FindPLayerByID implements Command{
     @Override
     public Packet createResponse(Packet incomingPacket) {
         String existingPlayer = null;
-
-        String PlayerID = incomingPacket.getObj();
-
+        String PlayerID = incomingPacket.getCommand().substring(18);
+        System.out.println(PlayerID);
         PlayerDaoInterface playerDAO= new MySqlPlayerDao();
+
+
 
 
         try
         {
+            playerDAO.initializeID();
             existingPlayer = playerDAO.findPlayerByIdJson(PlayerID);
         } catch (DaoException e) {
             throw new RuntimeException(e);

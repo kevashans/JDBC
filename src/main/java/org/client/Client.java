@@ -56,16 +56,11 @@ public class Client
             Scanner socketReader = new Scanner(socket.getInputStream());  // wait for, and retrieve the reply
 
 
-            if(command.startsWith("Time"))   //we expect the server to return a time
-            {
-                String timeString = socketReader.nextLine();
-                System.out.println("Client message: Response from server Time: " + timeString);
-            }
-            else                            // the user has entered the Echo command or an invalid command
-            {
+            ////SERVER REPLY
+
                 String input = socketReader.nextLine();
                 System.out.println("Client message: Response from server: \"" + input + "\"");
-            }
+
 
             socketWriter.close();
             socketReader.close();

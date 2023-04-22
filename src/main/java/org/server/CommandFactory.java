@@ -13,7 +13,7 @@ public class CommandFactory
     {
         Command newCommand = null;
 
-        if (command == "FIND_PLAYER_BY_ID"){
+        if (command.contains("FIND_PLAYER_BY_ID")){
             newCommand = new FindPLayerByID();
         }
 

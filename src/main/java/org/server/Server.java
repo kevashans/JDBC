@@ -36,6 +36,7 @@ import org.core.Packet;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLOutput;
 import java.time.LocalTime;
 import java.util.Scanner;
 
@@ -95,7 +96,7 @@ public class Server
                 InputStreamReader isReader = new InputStreamReader(clientSocket.getInputStream());
                 this.socketReader = new BufferedReader(isReader);
 
-                OutputStream os = this.socket.getOutputStream();
+                OutputStream os = clientSocket.getOutputStream();
 
                 this.socketWriter = new PrintWriter(os, true); // true => auto flush socket buffer
 
@@ -112,31 +113,38 @@ public class Server
         @Override
         public void run()
         {
+            String message;
+            Packet incomingPacket = new Packet(null,null);
+            Packet response = null;
             try
             {
 
-                OutputStream os = this.socket.getOutputStream();
-                InputStream in = this.socket.getInputStream();
-                Packet incomingPacket = new Packet(null,null);
-                Packet response = null;
-                Scanner input = new Scanner(new InputStreamReader(in));
-                PrintWriter output = new PrintWriter(new OutputStreamWriter(os));
-                while ((incomingPacket.getCommand()!="Quit"))
-                {
 
-                    incomingPacket.setCommand(input.nextLine());
-                    System.out.println("Received message " + incomingPacket);
 
-                    CommandFactory factory = new CommandFactory();
-                    Command command = factory.createCommand(incomingPacket.getCommand());
 
-                    if(command != null)
+
+                     message = socketReader.readLine();
+                    if (message.equals("TEST"))
                     {
-                        response = command.createResponse(incomingPacket);
+                        socketWriter.println("HALO");
+                    }else if(message.startsWith("FIND_PLAYER_BY_ID"))
+                    {
+                        incomingPacket.setCommand(message);
+
+                        System.out.println("message_received " + message);
+
+
+                        CommandFactory factory = new CommandFactory();
+                        Command command = factory.createCommand(incomingPacket.getCommand());
+                        System.out.println(command);
+
+                        if (command != null) {
+                            response = command.createResponse(incomingPacket);
+                        }
+                        socketWriter.println(response.getObj());
                     }
-                    output.println(response.getObj());
-                    output.flush();
-                }
+                    socketWriter.println("nothing");
+
 
 
 

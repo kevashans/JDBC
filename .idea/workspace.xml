@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0b48e36-c5c5-4071-8b0c-e90a0be0b913" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/client/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/core/Packet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/Command.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/FindPLayerByID.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/TEST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlScoutDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlScoutDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/DAOs/MySqlDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/DAOs/MySqlDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/DAOs/MySqlScoutDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/DAOs/MySqlScoutDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/FindPLayerByID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/FindPLayerByID.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/server/Server$ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/Server$ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/Server.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,12 +89,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="multithreaded.Server" />
+    <configuration name="Server (3)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.server.Server" />
       <module name="database-sample-1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="multithreaded.*" />
+          <option name="PATTERN" value="org.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TEST" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.TEST" />
+      <module name="database-sample-1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -121,8 +132,9 @@
       <list>
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.org.server.Server" />
-        <item itemvalue="Application.Server" />
+        <item itemvalue="Application.TEST" />
         <item itemvalue="Application.App" />
+        <item itemvalue="Application.Server (3)" />
       </list>
     </recent_temporary>
   </component>
