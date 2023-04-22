@@ -1,5 +1,6 @@
 package org.DAOs;
 
+import com.google.gson.JsonObject;
 import org.DTOs.Player;
 import org.DTOs.Scout;
 import org.Exceptions.DaoException;
@@ -213,6 +214,7 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
         Scout p = findScoutByID(id);
         Gson gsonParser = new Gson();
         String json = gsonParser.toJson(p);
+//        JsonObject jsonObject = json.get
         return json;
     }
 
