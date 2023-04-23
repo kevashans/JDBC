@@ -78,7 +78,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
 
             String query = "SELECT * FROM player WHERE playerID LIKE ?";
             ps = connection.prepareStatement(query);
-            ps.setString( 1,   playerID );
+            ps.setString( 1,playerID );
 
             //Using a PreparedStatement to execute SQL...
 

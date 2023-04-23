@@ -11,7 +11,6 @@ public class Scout {
         this.scout_name = scout_name;
         this.DOB = DOB;
     }
-
     public Scout(String id, String scout_name, Date DOB) {
         this.id = id;
         this.scout_name = scout_name;

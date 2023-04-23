@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0b48e36-c5c5-4071-8b0c-e90a0be0b913" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/FindAllPlayers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/scoutCommands/FindAllScouts.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/scoutCommands/FindScoutByID.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlReportDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/ReportDaoInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/DTOs/Report.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/FindPLayerByID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/FindPLayerByID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/server/CommandFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/CommandFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/server/FindPLayerByID.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/server/Server$ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/Server$ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlPlayerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlPlayerDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/DTOs/Scout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DTOs/Scout.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
