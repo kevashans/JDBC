@@ -20,13 +20,17 @@ package org.client;
 
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.DTOs.Player;
+import org.DTOs.Scout;
 import org.core.Packet;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.net.Socket;
+import java.util.List;
 import java.util.Scanner;
 
 public class Client
@@ -64,6 +68,25 @@ public class Client
                 String input = socketReader.nextLine();
                 Player p3 = new Gson().fromJson(input, Player.class);
                 System.out.println("Client message: Response from server: \"" + p3+ "\"");
+            }else if(command.startsWith("FIND_ALL_PLAYERS"))
+            {
+                Type list = new TypeToken<List<Player>>(){}.getType();
+                String input = socketReader.nextLine();
+                List<Player> playerArray = new Gson().fromJson(input, list);
+                System.out.println(playerArray);
+            }else if(command.startsWith("FIND_SCOUT_BY_ID"))
+            {
+                String input = socketReader.nextLine();
+                Scout s = new Gson().fromJson(input, Scout.class);
+                System.out.println(s);
+            }else if(command.startsWith("FIND_ALL_SCOUTS"))
+            {
+                Type list = new TypeToken<List<Scout>>(){}.getType();
+                String input = socketReader.nextLine();
+                List<Scout> scoutArray = new Gson().fromJson(input, list);
+                System.out.println(scoutArray);
+            }else{
+                System.out.println("command not found");
             }
 
 

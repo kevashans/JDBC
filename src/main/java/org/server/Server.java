@@ -25,9 +25,9 @@ package org.server;
  * <p>
  * This is an example of a simple protocol, where the server's response is based
  * on the client's request.
- *
- *  Each client is handled by a ClientHandler running in a separate worker Thread
- *  which allows the Server to continually listen for and handle multiple clients
+ * <p>
+ * Each client is handled by a ClientHandler running in a separate worker Thread
+ * which allows the Server to continually listen for and handle multiple clients
  */
 
 
@@ -40,18 +40,14 @@ import java.sql.SQLOutput;
 import java.time.LocalTime;
 import java.util.Scanner;
 
-public class Server
-{
-    public static void main(String[] args)
-    {
+public class Server {
+    public static void main(String[] args) {
         Server server = new Server();
         server.start();
     }
 
-    public void start()
-    {
-        try
-        {
+    public void start() {
+        try {
             ServerSocket ss = new ServerSocket(8080);  // set up ServerSocket to listen for connections on port 8080
 
             System.out.println("Server: Server started. Listening for connections on port 8080...");
@@ -75,8 +71,7 @@ public class Server
                 System.out.println("Server: ClientHandler started in thread for client " + clientNumber + ". ");
                 System.out.println("Server: Listening for further connections...");
             }
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             System.out.println("Server: IOException: " + e);
         }
         System.out.println("Server: Server exiting, Goodbye!");
@@ -89,69 +84,73 @@ public class Server
         Socket socket;
         int clientNumber;
 
-        public ClientHandler(Socket clientSocket, int clientNumber)
-        {
-            try
-            {
+        public ClientHandler(Socket clientSocket, int clientNumber) {
+            try {
                 InputStreamReader isReader = new InputStreamReader(clientSocket.getInputStream());
                 this.socketReader = new BufferedReader(isReader);
 
                 OutputStream os = clientSocket.getOutputStream();
 
-                this.socketWriter = new PrintWriter(os, true); // true => auto flush socket buffer
+                this.socketWriter = new PrintWriter(os); // true => auto flush socket buffer
 
                 this.clientNumber = clientNumber;  // ID number that we are assigning to this client
 
                 this.socket = clientSocket;  // store socket ref for closing
 
-            } catch (IOException ex)
-            {
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
 
         @Override
-        public void run()
-        {
+        public void run() {
             String message;
-            Packet incomingPacket = new Packet(null,null);
+            Packet incomingPacket = new Packet(null, null);
             Packet response = null;
-            try
-            {
+            try {
 
+                message = socketReader.readLine();
 
+//                if (message.equals("TEST")) {
+//                    socketWriter.println("HALO");
+//                } else {
+//                    incomingPacket.setCommand(message);
+//                    System.out.println("message_received " + message);
+//                    CommandFactory factory = new CommandFactory();
+//                    Command command = factory.createCommand(incomingPacket.getCommand());
+//                    System.out.println(command);
+//
+//                    if (command != null) {
+//                        response = command.createResponse(incomingPacket);
+//                    }
+//                    socketWriter.println(response.getObj());
+//                }
+////                    socketWriter.println("nothing");
+//
+//
+                while(incomingPacket.getCommand()!="QUIT")
+                {
+                if (message.equals("TEST")) {
+                    socketWriter.println("HALO");
+                } else {
+                    incomingPacket.setCommand(message);
+                    System.out.println("message_received " + message);
+                    CommandFactory factory = new CommandFactory();
+                    Command command = factory.createCommand(incomingPacket.getCommand());
+                    System.out.println(command);
 
-
-
-                     message = socketReader.readLine();
-                    if (message.equals("TEST"))
-                    {
-                        socketWriter.println("HALO");
-                    }else if(message.startsWith("FIND_PLAYER_BY_ID"))
-                    {
-                        incomingPacket.setCommand(message);
-
-                        System.out.println("message_received " + message);
-
-
-                        CommandFactory factory = new CommandFactory();
-                        Command command = factory.createCommand(incomingPacket.getCommand());
-                        System.out.println(command);
-
-                        if (command != null) {
-                            response = command.createResponse(incomingPacket);
-                        }
-                        socketWriter.println(response.getObj());
+                    if (command != null) {
+                        response = command.createResponse(incomingPacket);
                     }
-                    socketWriter.println("nothing");
+                    socketWriter.println(response.getObj());
+                    socketWriter.flush();
+                }
 
-
-
-
+                }
                 socket.close();
 
-            } catch (IOException ex)
-            {
+
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
             System.out.println("Server: (ClientHandler): Handler for Client " + clientNumber + " is terminating .....");
