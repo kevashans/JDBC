@@ -1,9 +1,7 @@
 package org.example;
 
-import org.DAOs.MySqlPlayerDao;
-import org.DAOs.MySqlScoutDao;
-import org.DAOs.PlayerDaoInterface;
-import org.DAOs.ScoutDaoInterface;
+import org.DAOs.*;
+import org.DTOs.Report;
 import org.Exceptions.DaoException;
 import org.core.Packet;
 import org.server.Command;
@@ -16,7 +14,7 @@ public class TEST {
 
         Packet incomingPacket = new Packet(null,null);
         Packet response = null;
-        incomingPacket.setCommand("FIND_PLAYER_BY_ID PL1");
+        incomingPacket.setCommand("FIND_REPORT_BY_SCOUT_ID SC07");
         System.out.println(incomingPacket.getCommand());
         CommandFactory factory = new CommandFactory();
         Command command = factory.createCommand(incomingPacket.getCommand());
@@ -26,5 +24,15 @@ public class TEST {
             response = command.createResponse(incomingPacket);
         }
         System.out.println(response.getObj());
+
+
+
+//        ReportDaoInterface reportDAO= new MySqlReportDao();
+////       Report r =new Report("PL01", "SC04", 2013, "great overall inside player", "ball dominant, average efficiency, better ball dominant player in harden");
+//        try {
+//            System.out.println(reportDAO.findReportByIdJson("PL01","SC07"));
+//        } catch (DaoException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }

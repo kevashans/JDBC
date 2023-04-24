@@ -55,4 +55,15 @@ public class Report {
     public void setNegatives(String negatives) {
         this.negatives = negatives;
     }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "playerID='" + playerID + '\'' +
+                ", scoutID='" + scoutID + '\'' +
+                ", season=" + season +
+                ", positives='" + positives + '\'' +
+                ", negatives='" + negatives + '\'' +
+                '}';
+    }
 }

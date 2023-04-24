@@ -53,6 +53,7 @@ public class MySqlReportDao extends MySqlDao implements ReportDaoInterface{
         ResultSet resultSet = null;
         Report p = null;
 
+
             try
             {
                 //Get connection object using the methods in the super class (MySqlDao.java)...
@@ -93,6 +94,101 @@ public class MySqlReportDao extends MySqlDao implements ReportDaoInterface{
     }
 
     @Override
+    public List<Report> findReportByPlayerID(String playerID) throws DaoException {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        Report p = null;
+        List<Report> reportsList = new ArrayList<>();
+
+
+        try
+        {
+            //Get connection object using the methods in the super class (MySqlDao.java)...
+            connection = this.getConnection();
+
+            String query = "SELECT * FROM reports WHERE playerID LIKE ?";
+            ps = connection.prepareStatement(query);
+            ps.setString( 1,playerID );
+
+
+            //Using a PreparedStatement to execute SQL...
+
+            resultSet = ps.executeQuery();
+            while (resultSet.next())
+            {
+                String playerId = resultSet.getString("playerID");
+                String scoutId = resultSet.getString("scoutID");
+                int season = resultSet.getInt("season");
+                String positives = resultSet.getString("positives");
+                String negatives = resultSet.getString("negatives");
+                p = new Report(playerId, scoutId, season, positives, negatives);
+
+                reportsList.add(p);
+            }
+            if (p == null) {
+                throw new DaoException("Report with player ID " + playerID + " not found.");
+            }
+        } catch (SQLException e)
+        {
+            throw new DaoException(e.getMessage());
+        } finally
+        {
+            closeResources(connection, ps, resultSet);
+        }
+
+        return reportsList;
+    }
+
+    @Override
+    public List<Report> findReportByScoutID(String scoutID) throws DaoException {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        Report p = null;
+        List<Report> reportsList = new ArrayList<>();
+
+
+        try
+        {
+            //Get connection object using the methods in the super class (MySqlDao.java)...
+            connection = this.getConnection();
+
+            String query = "SELECT * FROM reports WHERE scoutID LIKE ?";
+            ps = connection.prepareStatement(query);
+            ps.setString( 1,scoutID );
+
+
+            //Using a PreparedStatement to execute SQL...
+
+            resultSet = ps.executeQuery();
+            while (resultSet.next())
+            {
+                String playerId = resultSet.getString("playerID");
+                String scoutId = resultSet.getString("scoutID");
+                int season = resultSet.getInt("season");
+                String positives = resultSet.getString("positives");
+                String negatives = resultSet.getString("negatives");
+                p = new Report(playerId, scoutId, season, positives, negatives);
+
+                reportsList.add(p);
+            }
+            if (p == null) {
+                throw new DaoException("Report with player ID " + scoutID + " not found.");
+            }
+        } catch (SQLException e)
+        {
+            throw new DaoException(e.getMessage());
+        } finally
+        {
+            closeResources(connection, ps, resultSet);
+        }
+
+        return reportsList;
+    }
+
+
+    @Override
     public void deleteReportByID(String playerID, String scoutID) throws DaoException {
         Connection connection = null;
         PreparedStatement ps = null;
@@ -109,7 +205,7 @@ public class MySqlReportDao extends MySqlDao implements ReportDaoInterface{
             String query = "delete FROM reports WHERE playerID LIKE ? and scoutID LIKE ?";
             ps = connection.prepareStatement(query);
             ps.setString( 1, playerID );
-            ps.setString( 1, scoutID );
+            ps.setString( 2, scoutID );
 
             //Using a PreparedStatement to execute SQL...
             resultSet = ps.executeUpdate();
@@ -168,6 +264,22 @@ public class MySqlReportDao extends MySqlDao implements ReportDaoInterface{
     @Override
     public String findReportByIdJson(String playerID, String scoutID) throws DaoException {
         Report p = findReportByID(playerID,scoutID);
+        Gson gsonParser = new Gson();
+        String json = gsonParser.toJson(p);
+        return json;
+    }
+
+    @Override
+    public String findReportByPlayerIDJson(String playerID) throws DaoException {
+        List<Report> p = findReportByPlayerID(playerID);
+        Gson gsonParser = new Gson();
+        String json = gsonParser.toJson(p);
+        return json;
+    }
+
+    @Override
+    public String findReportByScoutIDJson(String scoutID) throws DaoException {
+        List<Report> p = findReportByScoutID(scoutID);
         Gson gsonParser = new Gson();
         String json = gsonParser.toJson(p);
         return json;
