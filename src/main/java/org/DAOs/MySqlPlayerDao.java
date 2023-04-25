@@ -64,7 +64,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
     }
 
     @Override
-    public Player findplayerByID(String playerID) throws DaoException {
+    public Player findPlayerByID(String playerID) throws DaoException {
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet resultSet = null;
@@ -111,7 +111,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
     }
 
     @Override
-    public void deleteplayerByID(String playerID) throws DaoException {
+    public void deletePlayerByID(String playerID) throws DaoException {
         Connection connection = null;
         PreparedStatement ps = null;
 //        ResultSet resultSet = null;
@@ -221,7 +221,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
 
     @Override
     public String findPlayerByIdJson(String id) throws DaoException {
-        Player p = findplayerByID(id);
+        Player p = findPlayerByID(id);
         Gson gsonParser = new Gson();
         String json = gsonParser.toJson(p);
         return json;

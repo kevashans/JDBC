@@ -53,43 +53,49 @@ public class Client
             System.out.println("Client message: The Client is running and has connected to the server");
 
             System.out.println("Please enter a command:  (\"Time\" to get time, or \"Echo message\" to get echo) \n>");
-            String command = in.nextLine();
+//            String command = in.nextLine();
 
             OutputStream os = socket.getOutputStream();
             PrintWriter socketWriter = new PrintWriter(os, true);   // true => auto flush buffers
 
-            socketWriter.println(command);
+//            socketWriter.println(command);
 
             Scanner socketReader = new Scanner(socket.getInputStream());  // wait for, and retrieve the reply
              playerMenu menu1 = new playerMenu(socketReader,socketWriter);
              menu1.setUpPlayerMenu();
 
             ////SERVER REPLY
-            if (command.startsWith("FIND_PLAYER_BY_ID"))
-            {
-                String input = socketReader.nextLine();
-                Player p3 = new Gson().fromJson(input, Player.class);
-                System.out.println(p3);
-            }else if(command.startsWith("FIND_ALL_PLAYERS"))
-            {
-                Type list = new TypeToken<List<Player>>(){}.getType();
-                String input = socketReader.nextLine();
-                List<Player> playerArray = new Gson().fromJson(input, list);
-                System.out.println(playerArray);
-            }else if(command.startsWith("FIND_SCOUT_BY_ID"))
-            {
-                String input = socketReader.nextLine();
-                Scout s = new Gson().fromJson(input, Scout.class);
-                System.out.println(s);
-            }else if(command.startsWith("FIND_ALL_SCOUTS"))
-            {
-                Type list = new TypeToken<List<Scout>>(){}.getType();
-                String input = socketReader.nextLine();
-                List<Scout> scoutArray = new Gson().fromJson(input, list);
-                System.out.println(scoutArray);
-            }else{
-                System.out.println("command not found");
-            }
+//            if (command.startsWith("FIND_PLAYER_BY_ID"))
+//            {
+//                String input = socketReader.nextLine();
+//                Player p3 = new Gson().fromJson(input, Player.class);
+//                System.out.println(p3);
+//            }else if(command.startsWith("FIND_ALL_PLAYERS"))
+//            {
+//                Type list = new TypeToken<List<Player>>(){}.getType();
+//                String input = socketReader.nextLine();
+//                List<Player> playerArray = new Gson().fromJson(input, list);
+//                System.out.println(playerArray);
+//            }else if(command.startsWith("FIND_SCOUT_BY_ID"))
+//            {
+//                String input = socketReader.nextLine();
+//                Scout s = new Gson().fromJson(input, Scout.class);
+//                System.out.println(s);
+//            }else if(command.startsWith("FIND_ALL_SCOUTS"))
+//            {
+//                Type list = new TypeToken<List<Scout>>(){}.getType();
+//                String input = socketReader.nextLine();
+//                List<Scout> scoutArray = new Gson().fromJson(input, list);
+//                System.out.println(scoutArray);
+//            }else if(command.startsWith("FIND_ALL_SCOUTS"))
+//            {
+//                Type list = new TypeToken<List<Scout>>(){}.getType();
+//                String input = socketReader.nextLine();
+//                List<Scout> scoutArray = new Gson().fromJson(input, list);
+//                System.out.println(scoutArray);
+//            }else{
+//                System.out.println("command not found");
+//            }
 
 
             socketWriter.close();

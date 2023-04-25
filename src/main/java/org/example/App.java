@@ -16,8 +16,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -79,13 +77,13 @@ public class App {
                         case 2:
                             System.out.println("Please enter ID: ");
                             String inputID = keyboard.next();
-                            System.out.println(userDao.findplayerByID(inputID));
+                            System.out.println(userDao.findPlayerByID(inputID));
                             break;
 
                         case 3:
                             System.out.println("Please enter ID: ");
                             inputID = keyboard.next();
-                            userDao.deleteplayerByID(inputID);
+                            userDao.deletePlayerByID(inputID);
                             break;
 
                         case 4:
@@ -125,7 +123,7 @@ public class App {
                         case 7:
                             System.out.println("Please enter ID: ");
                             inputID = keyboard.next();
-                            System.out.println(userDao.findplayerByID(inputID));
+                            System.out.println(userDao.findPlayerByID(inputID));
                         case 8:
                             print();
                             exit = true;

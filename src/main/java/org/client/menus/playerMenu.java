@@ -1,16 +1,20 @@
 package org.client.menus;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.Comparator.CompDraftYear;
 import org.DAOs.MySqlPlayerDao;
 import org.DAOs.PlayerDaoInterface;
 import org.DTOs.Player;
 import org.Exceptions.DaoException;
+import org.core.Packet;
 import org.enums;
 
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class playerMenu extends Menu {
@@ -28,6 +32,7 @@ public class playerMenu extends Menu {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Select feature:");
         PlayerDaoInterface userDao= new MySqlPlayerDao();
+        userDao.updateId();
 
         printPlayerOption();
         int input = keyboard.nextInt();
@@ -41,13 +46,13 @@ public class playerMenu extends Menu {
                 case 2:
                     System.out.println("Please enter ID: ");
                     String inputID = keyboard.next();
-                    System.out.println(userDao.findplayerByID(inputID));
+                    System.out.println(userDao.findPlayerByID(inputID));
                     break;
 
                 case 3:
                     System.out.println("Please enter ID: ");
                     inputID = keyboard.next();
-                    userDao.deleteplayerByID(inputID);
+                    userDao.deletePlayerByID(inputID);
                     break;
 
                 case 4:
@@ -72,7 +77,15 @@ public class playerMenu extends Menu {
                     Date date = Date.valueOf(playerBirthDate);
 
                     Player inputPlayer = new Player(playerName, date, position, draftYear);
+                    Gson gsonParser = new Gson();
+                    String newTrainJson = gsonParser.toJson(inputPlayer);
+
+                    Packet incomingPacket = new Packet(null,null);
+                    incomingPacket.setCommand("TEST");
+                    incomingPacket.setObj(newTrainJson);
+                    System.out.println(incomingPacket.writeJSON());
                     userDao.insertPlayer(inputPlayer);
+                    print();
                     break;
 
                 case 5:
@@ -81,15 +94,19 @@ public class playerMenu extends Menu {
                     break;
 
                 case 6:
-                    super.outputCommand("FIND_ALL_PLAYERS");
-                    Player p3 = new Gson().fromJson(super.getResult(), Player.class);
+                    outputCommand("FIND_ALL_PLAYERS");
+                    Type list = new TypeToken<List<Player>>(){}.getType();
+                    List<Player> playerArray = new Gson().fromJson(getResult(), list);
+                    System.out.println(playerArray);
 
                     break;
 
                 case 7:
                     System.out.println("Please enter ID: ");
                     inputID = keyboard.next();
-                    System.out.println(userDao.findplayerByID(inputID));
+                    outputCommand("FIND_PLAYER_BY_ID " + inputID.toUpperCase());
+                    Player p = new Gson().fromJson(getResult(), Player.class);
+                    System.out.println(p);
                 case 8:
                     print();
                     exit = true;

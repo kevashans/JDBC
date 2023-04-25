@@ -111,25 +111,41 @@ public class Server {
 
                 message = socketReader.readLine();
 
-                while(incomingPacket.getCommand()!="QUIT_ALL")
+//                if (message.equals("TEST")) {
+//                    socketWriter.println("HALO");
+//                } else {
+//                    incomingPacket.setCommand(message);
+//                    System.out.println("message_received " + message);
+//                    CommandFactory factory = new CommandFactory();
+//                    Command command = factory.createCommand(incomingPacket.getCommand());
+//                    System.out.println(command);
+//
+//                    if (command != null) {
+//                        response = command.createResponse(incomingPacket);
+//                    }
+//                    socketWriter.println(response.getObj());
+//                }
+////                    socketWriter.println("nothing");
+//
+//
+                while(incomingPacket.getCommand()!="QUIT")
                 {
-                if (message.equals("TEST")) {
-                    socketWriter.println("HALO");
-                } else {
-                    incomingPacket.setCommand(message);
-                    System.out.println("message_received " + message);
-                    CommandFactory factory = new CommandFactory();
-                    Command command = factory.createCommand(incomingPacket.getCommand());
-                    System.out.println(command);
+                    if (message.equals("TEST")) {
+                        socketWriter.println("HALO");
+                    } else {
+                        incomingPacket.setCommand(message);
+                        System.out.println("message_received " + message);
+                        CommandFactory factory = new CommandFactory();
+                        Command command = factory.createCommand(incomingPacket.getCommand());
+                        System.out.println(command);
 
-                    if (command != null) {
-                        response = command.createResponse(incomingPacket);
+                        if (command != null) {
+                            response = command.createResponse(incomingPacket);
+                        }
+                        socketWriter.println(response.getObj());
+                        socketWriter.flush();
                     }
 
-
-                }
-                    socketWriter.println(response.getObj());
-                    socketWriter.flush();
                 }
                 socket.close();
 

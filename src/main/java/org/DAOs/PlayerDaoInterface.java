@@ -9,8 +9,8 @@ import java.util.List;
 public interface PlayerDaoInterface {
     public List<Player> findAllPlayers() throws DaoException;
     public void initializeID()throws DaoException;
-    public Player findplayerByID( String playerID) throws DaoException;
-    public void  deleteplayerByID( String playerID) throws DaoException;
+    public Player findPlayerByID(String playerID) throws DaoException;
+    public void deletePlayerByID(String playerID) throws DaoException;
     public void  insertPlayer(Player playerData) throws DaoException;
     public List<Player> findPlayerUsingFilter( Comparator<Player> comparator ) throws DaoException;
     public String findAllPlayersJson() throws DaoException;

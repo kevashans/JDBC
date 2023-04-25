@@ -19,12 +19,20 @@ public abstract class Menu {
         this.socketReader = socketReader;
     }
 
+    public PrintWriter getSocketWriter() {
+        return socketWriter;
+    }
+
+    public Scanner getSocketReader() {
+        return socketReader;
+    }
+
     public void outputCommand(String command)
     {
-        this.socketWriter.println(command);
+        getSocketWriter().println(command);
     }
     public String getResult(){
-        return this.socketReader.nextLine();
+       return getSocketReader().nextLine();
     }
     public static <E extends Enum<E>> boolean isInEnum(String value, Class<E> enumClass) {
         for (E e : enumClass.getEnumConstants()) {
