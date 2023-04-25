@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.DTOs.Player;
 import org.DTOs.Scout;
+import org.client.menus.playerMenu;
 import org.core.Packet;
 
 import java.io.IOException;
@@ -60,14 +61,15 @@ public class Client
             socketWriter.println(command);
 
             Scanner socketReader = new Scanner(socket.getInputStream());  // wait for, and retrieve the reply
-
+             playerMenu menu1 = new playerMenu(socketReader,socketWriter);
+             menu1.setUpPlayerMenu();
 
             ////SERVER REPLY
             if (command.startsWith("FIND_PLAYER_BY_ID"))
             {
                 String input = socketReader.nextLine();
                 Player p3 = new Gson().fromJson(input, Player.class);
-                System.out.println("Client message: Response from server: \"" + p3+ "\"");
+                System.out.println(p3);
             }else if(command.startsWith("FIND_ALL_PLAYERS"))
             {
                 Type list = new TypeToken<List<Player>>(){}.getType();

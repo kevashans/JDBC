@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0b48e36-c5c5-4071-8b0c-e90a0be0b913" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindAllReports.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindReportByID.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindReportByPlayerID.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindReportByScoutID.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/Menu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/playerMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlReportDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlReportDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/ReportDaoInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/ReportDaoInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/DTOs/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DTOs/Report.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TEST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TEST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/DTOs/Scout.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/DTOs/Scout.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/TEST.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/TEST.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/server/CommandFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/CommandFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +59,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.TEST">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.App" />
       <module name="database-sample-1" />
@@ -135,8 +127,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TEST" />
         <item itemvalue="Application.Client" />
+        <item itemvalue="Application.Server" />
+        <item itemvalue="Application.TEST" />
         <item itemvalue="Application.App" />
         <item itemvalue="Application.Server (1)" />
       </list>
