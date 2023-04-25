@@ -36,6 +36,8 @@ public class playerMenu extends Menu {
 
         printPlayerOption();
         int input = keyboard.nextInt();
+        Packet outgoingPacket = new Packet("", "");
+        Packet responsePacket = new Packet("", "");
 
         try {
             switch (input) {
@@ -78,13 +80,11 @@ public class playerMenu extends Menu {
 
                     Player inputPlayer = new Player(playerName, date, position, draftYear);
                     Gson gsonParser = new Gson();
-                    String newTrainJson = gsonParser.toJson(inputPlayer);
+                    String newPlayerJson = gsonParser.toJson(inputPlayer);
+                    outgoingPacket.setCommand("INSERT_PLAYER");
+                    outgoingPacket.setObj(newPlayerJson);
+                    outputCommand(outgoingPacket.writeJSON());
 
-                    Packet incomingPacket = new Packet(null,null);
-                    incomingPacket.setCommand("TEST");
-                    incomingPacket.setObj(newTrainJson);
-                    System.out.println(incomingPacket.writeJSON());
-                    userDao.insertPlayer(inputPlayer);
                     print();
                     break;
 
@@ -94,9 +94,18 @@ public class playerMenu extends Menu {
                     break;
 
                 case 6:
-                    outputCommand("FIND_ALL_PLAYERS");
+//                    Packet outPacket2 = new Packet("FIND_ALL_PLAYERS","");
+                    outgoingPacket.setCommand("FIND_ALL_PLAYERS");
+                    System.out.println(outgoingPacket.writeJSON());
+
+
+                    outputCommand(outgoingPacket.writeJSON());
+
+//                    Packet serverPacket = new Packet("","");
                     Type list = new TypeToken<List<Player>>(){}.getType();
-                    List<Player> playerArray = new Gson().fromJson(getResult(), list);
+                    getResult(responsePacket);
+
+                    List<Player> playerArray = new Gson().fromJson(responsePacket.getObj(), list);
                     System.out.println(playerArray);
 
                     break;
@@ -104,8 +113,10 @@ public class playerMenu extends Menu {
                 case 7:
                     System.out.println("Please enter ID: ");
                     inputID = keyboard.next();
-                    outputCommand("FIND_PLAYER_BY_ID " + inputID.toUpperCase());
-                    Player p = new Gson().fromJson(getResult(), Player.class);
+                    outgoingPacket.setCommand("FIND_PLAYER_BY_ID " + inputID.toUpperCase());
+                    outputCommand(outgoingPacket.writeJSON());
+                    getResult(responsePacket);
+                    Player p = new Gson().fromJson(responsePacket.getObj(), Player.class);
                     System.out.println(p);
                 case 8:
                     print();

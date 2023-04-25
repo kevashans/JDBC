@@ -31,7 +31,10 @@ package org.server;
  */
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.core.Packet;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -107,9 +110,10 @@ public class Server {
             String message;
             Packet incomingPacket = new Packet(null, null);
             Packet response = null;
+
             try {
 
-                message = socketReader.readLine();
+//                message = socketReader.readLine();
 
 //                if (message.equals("TEST")) {
 //                    socketWriter.println("HALO");
@@ -128,25 +132,24 @@ public class Server {
 ////                    socketWriter.println("nothing");
 //
 //
-                while(incomingPacket.getCommand()!="QUIT")
-                {
-                    if (message.equals("TEST")) {
-                        socketWriter.println("HALO");
-                    } else {
-                        incomingPacket.setCommand(message);
-                        System.out.println("message_received " + message);
+
+
+
+                        incomingPacket.readJson(new JSONObject(socketReader.readLine()));
+//                        System.out.println("message_received " + incomingPacket);
                         CommandFactory factory = new CommandFactory();
+                        socketWriter.println(incomingPacket.getCommand());
                         Command command = factory.createCommand(incomingPacket.getCommand());
-                        System.out.println(command);
+//                        System.out.println(command);
 
                         if (command != null) {
                             response = command.createResponse(incomingPacket);
                         }
-                        socketWriter.println(response.getObj());
+                        socketWriter.println(response.writeJSON());
                         socketWriter.flush();
-                    }
 
-                }
+
+
                 socket.close();
 
 

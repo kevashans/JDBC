@@ -1,6 +1,7 @@
 package org.core;
 
 import com.google.gson.JsonObject;
+import org.json.JSONObject;
 
 public class Packet {
     String command;
@@ -23,12 +24,17 @@ public class Packet {
         return obj;
     }
 
-    public JsonObject writeJSON()
+    public JSONObject writeJSON()
     {
-        JsonObject jo = new JsonObject();
-        jo.addProperty("messageType", this.command);
-        jo.addProperty("payload", this.obj);
+        JSONObject jo = new JSONObject();
+        jo.put("command", this.command);
+        jo.put("payload", this.obj);
         return jo;
+    }
+
+    public void readJson(JSONObject jo){
+        this.setCommand(String.valueOf(jo.get("command")));
+        this.setObj(String.valueOf(jo.get("payload")));
     }
 
     public void setObj(String obj) {

@@ -1,8 +1,10 @@
 package org.client.menus;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.DTOs.Player;
 import org.core.Packet;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,12 +29,15 @@ public abstract class Menu {
         return socketReader;
     }
 
-    public void outputCommand(String command)
+    public void outputCommand(JSONObject jo)
     {
-        getSocketWriter().println(command);
+        getSocketWriter().println(jo);
+        getSocketWriter().flush();
     }
-    public String getResult(){
-       return getSocketReader().nextLine();
+    public void getResult(Packet responsePacket)
+    {
+        System.out.println(getSocketReader().nextLine());
+        responsePacket.readJson(new JSONObject(getSocketReader().nextLine()));
     }
     public static <E extends Enum<E>> boolean isInEnum(String value, Class<E> enumClass) {
         for (E e : enumClass.getEnumConstants()) {

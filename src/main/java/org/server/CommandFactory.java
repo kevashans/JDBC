@@ -3,6 +3,7 @@ package org.server;
 
 import org.server.playerCommands.FindAllPlayers;
 import org.server.playerCommands.FindPLayerByID;
+import org.server.playerCommands.insertPlayer;
 import org.server.reportCommands.FindAllReports;
 import org.server.reportCommands.FindReportByID;
 import org.server.reportCommands.FindReportByPlayerID;
@@ -43,9 +44,9 @@ public class CommandFactory
         }else if(command.contains("FIND_REPORT_BY_SCOUT_ID"))
         {
             newCommand = new FindReportByScoutID();
-        }else if(command.contains("FIND_REPORT_BY_PLAYER_ID"))
+        }else if(command.contains("INSERT_PLAYER"))
         {
-            newCommand = new FindReportByPlayerID();
+            newCommand = new insertPlayer();
         }
 
         return newCommand;
