@@ -19,19 +19,13 @@ package org.client;
  */
 
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import org.DTOs.Player;
-import org.DTOs.Scout;
-import org.client.menus.playerMenu;
-import org.core.Packet;
+import org.client.menus.PlayerMenu;
+import org.client.menus.ScoutMenu;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.lang.reflect.Type;
 import java.net.Socket;
-import java.util.List;
 import java.util.Scanner;
 
 public class Client
@@ -61,8 +55,10 @@ public class Client
 //            socketWriter.println(command);
 
             Scanner socketReader = new Scanner(socket.getInputStream());  // wait for, and retrieve the reply
-             playerMenu menu1 = new playerMenu(socketReader,socketWriter);
-             menu1.setUpPlayerMenu();
+//             PlayerMenu menu1 = new PlayerMenu(socketReader,socketWriter);
+            ScoutMenu menu2 = new ScoutMenu(socketReader,socketWriter);
+//             menu1.setUpPlayerMenu();
+            menu2.setUpScoutMenu();
 
             ////SERVER REPLY
 //            if (command.startsWith("FIND_PLAYER_BY_ID"))

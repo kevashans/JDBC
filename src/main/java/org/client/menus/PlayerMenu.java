@@ -17,14 +17,13 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class playerMenu extends Menu {
-    public playerMenu(Scanner socketReader, PrintWriter socketWriter) {
+public class PlayerMenu extends Menu {
+    public PlayerMenu(Scanner socketReader, PrintWriter socketWriter) {
         super(socketReader, socketWriter);
     }
 
     public static void printPlayerOption(){
         System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Sort by DraftYear\n6. Find all(JSON)\n7. Find by ID (JSON)\n8. Exit");
-
     }
 
     public void setUpPlayerMenu() {
@@ -89,19 +88,17 @@ public class playerMenu extends Menu {
                     break;
 
                 case 5:
-//                        System.out.println("enter draft year");
                     System.out.println(userDao.findPlayerUsingFilter(new CompDraftYear()));
+                    outgoingPacket.setCommand("FIND_PLAYER_USING_FILTER");
                     break;
 
                 case 6:
-//                    Packet outPacket2 = new Packet("FIND_ALL_PLAYERS","");
+
                     outgoingPacket.setCommand("FIND_ALL_PLAYERS");
                     System.out.println(outgoingPacket.writeJSON());
 
-
                     outputCommand(outgoingPacket.writeJSON());
 
-//                    Packet serverPacket = new Packet("","");
                     Type list = new TypeToken<List<Player>>(){}.getType();
                     getResult(responsePacket);
 

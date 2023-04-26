@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0b48e36-c5c5-4071-8b0c-e90a0be0b913" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/insertPlayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/ScoutMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/FindPlayerUsingFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/idTracker.txt" beforeDir="false" afterPath="$PROJECT_DIR$/idTracker.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/menus/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/menus/playerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/playerMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/core/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/core/Packet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/menus/playerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/PlayerMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/playerMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/playerMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/core/Packet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/core/Packet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/server/Server$ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/Server$ClientHandler.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,19 +87,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Server (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.server.Server" />
-      <module name="database-sample-1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.server.Server" />
       <module name="database-sample-1" />
@@ -133,13 +113,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="org.server in database-sample-1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="database-sample-1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.server" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="JUnit.org.server in database-sample-1" />
         <item itemvalue="Application.TEST" />
         <item itemvalue="Application.App" />
-        <item itemvalue="Application.Server (1)" />
       </list>
     </recent_temporary>
   </component>
