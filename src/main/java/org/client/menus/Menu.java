@@ -55,6 +55,18 @@ public abstract class Menu {
         printer.print(Player.getIdCount());
         printer.close();
     }
+//    public static void startingMenu(){
+//        System.out.println("Please select menu: \n1.Player\n2.Scout\n3.Reports");
+//        Scanner in = new Scanner(System.in);
+//        int command = in.nextInt();
+//        PlayerMenu menu1 = new PlayerMenu(this.getSocketReader(),socketWriter);
+//        ScoutMenu menu2 = new ScoutMenu(socketReader,socketWriter);
+//        if (command ==1) {
+//            menu1.setUpPlayerMenu();
+//        }else if(command==2){
+//            menu2.setUpScoutMenu();
+//        }
+//    }
 
 
 }

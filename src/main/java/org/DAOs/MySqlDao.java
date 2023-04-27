@@ -59,27 +59,27 @@ public class MySqlDao {
     }
 
     public void closeResources(Connection connection, PreparedStatement ps, ResultSet resultSet) throws DaoException {
-//        try {
-//            if (resultSet != null) {
-//                resultSet.close();
-//            }
-//            if (ps != null) {
-//                ps.close();
-//            }
-//            if (connection != null) {
-//                freeConnection(connection);
-//            }
-//        } catch (SQLException e) {
-//            throw new DaoException("Error occurred while closing resources: " + e.getMessage());
-//        }
-//        try (ResultSet rs = resultSet;
-//             PreparedStatement pstmt = ps;
-//             Connection conn = connection) {
-//            // No need to explicitly close resources
-//            // Code logic goes here
-//        } catch (SQLException e) {
-//            throw new DaoException("Error occurred while closing resources: " + e.getMessage());
-//        }
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (connection != null) {
+                freeConnection(connection);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Error occurred while closing resources: " + e.getMessage());
+        }
+        try (ResultSet rs = resultSet;
+             PreparedStatement pstmt = ps;
+             Connection conn = connection) {
+            // No need to explicitly close resources
+            // Code logic goes here
+        } catch (SQLException e) {
+            throw new DaoException("Error occurred while closing resources: " + e.getMessage());
+        }
 
 
     }

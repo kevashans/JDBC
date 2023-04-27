@@ -21,7 +21,7 @@ public class insertPlayer implements Command {
             playerDAO.insertPlayer(insertPlayer);
         }
         catch (DaoException de) {
-
+            throw new RuntimeException(de);
         }
 
         return incomingPacket;

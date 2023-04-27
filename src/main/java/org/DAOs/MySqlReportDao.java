@@ -187,6 +187,53 @@ public class MySqlReportDao extends MySqlDao implements ReportDaoInterface{
         return reportsList;
     }
 
+    @Override
+    public List<Report> findReportByPlayerName(String name) throws DaoException {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        Report p = null;
+        List<Report> reportsList = new ArrayList<>();
+
+
+        try
+        {
+            //Get connection object using the methods in the super class (MySqlDao.java)...
+            connection = this.getConnection();
+
+            String query = "SELECT * FROM `player`,reports WHERE player.playerID=reports.playerID and player_name like ?";
+            ps = connection.prepareStatement(query);
+            ps.setString( 1,"%"+ name+"%" );
+
+
+            //Using a PreparedStatement to execute SQL...
+
+            resultSet = ps.executeQuery();
+            while (resultSet.next())
+            {
+                String playerId = resultSet.getString("playerID");
+                String scoutId = resultSet.getString("scoutID");
+                int season = resultSet.getInt("season");
+                String positives = resultSet.getString("positives");
+                String negatives = resultSet.getString("negatives");
+                p = new Report(playerId, scoutId, season, positives, negatives);
+
+                reportsList.add(p);
+            }
+            if (p == null) {
+                throw new DaoException("Report with the name " + name + " not found.");
+            }
+        } catch (SQLException e)
+        {
+            throw new DaoException(e.getMessage());
+        } finally
+        {
+            closeResources(connection, ps, resultSet);
+        }
+
+        return reportsList;
+    }
+
 
     @Override
     public void deleteReportByID(String playerID, String scoutID) throws DaoException {
@@ -275,6 +322,15 @@ public class MySqlReportDao extends MySqlDao implements ReportDaoInterface{
         Gson gsonParser = new Gson();
         String json = gsonParser.toJson(p);
         return json;
+    }
+
+    @Override
+    public String findReportByPlayerNameJson(String name) throws DaoException {
+        List<Report> p = findReportByPlayerName(name);
+        Gson gsonParser = new Gson();
+        String json = gsonParser.toJson(p);
+        return json;
+
     }
 
     @Override

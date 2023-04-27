@@ -9,6 +9,7 @@ import org.DAOs.ScoutDaoInterface;
 import org.DTOs.Player;
 import org.DTOs.Scout;
 import org.Exceptions.DaoException;
+import org.client.Client;
 import org.core.Packet;
 
 import java.io.PrintWriter;
@@ -18,52 +19,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ScoutMenu extends Menu {
+    private final Scanner keyboard;
+    private final MySqlScoutDao scoutDao;
+    private final Gson gsonParser;
+
     public ScoutMenu(Scanner socketReader, PrintWriter socketWriter) {
         super(socketReader, socketWriter);
+        this.keyboard = new Scanner(System.in);
+        this.scoutDao = new MySqlScoutDao();
+        this.gsonParser = new Gson();
     }
 
     public void setUpScoutMenu() {
-        Scanner keyboard = new Scanner(System.in);
-        ScoutDaoInterface scoutDao = new MySqlScoutDao();
         Packet outgoingPacket = new Packet("", "");
         Packet responsePacket = new Packet("", "");
 
         System.out.println("select feature");
 
-        System.out.println("1. Find all scouts\n2. Find scout by ID\n3. Delete scout by ID\n4. Insert scout\n5. Sort by DOB\n6. Find all(JSON)\n7. Find by ID (JSON)\n8. Exit");
+        System.out.println("1. Find all scouts\n2. Find scout by ID\n3. Delete scout by ID\n4. Insert scout\n5. Sort by DOB)\n7. Exit");
         int input1 = keyboard.nextInt();
         try {
             switch (input1) {
                 case 1:
-                    System.out.println(scoutDao.findAllScouts());
-                    break;
-                case 2:
-                    System.out.println("Please enter ID");
-                    String id = keyboard.next();
-                    System.out.println(scoutDao.findScoutByID(id));
-                    break;
-                case 3:
-                    System.out.println("Please enter ID:");
-                    String deleteid = keyboard.next();
-                    scoutDao.deleteScoutByID(deleteid);
-                case 4:
-//                            System.out.println("Please enter ID:");
-//                            String inputID = keyboard.next();
-                    System.out.println("Please enter name:");
-                    String inputName = keyboard.next();
-                    System.out.println("Please enter birth date (YYYY-MM-DD):");
-                    String inputDOB = keyboard.next();
-
-                    Date date = Date.valueOf(inputDOB);
-
-                    Scout s = new Scout(inputName, date);
-                    scoutDao.insertScout(s);
-
-                case 5:
-                    System.out.println(scoutDao.findScoutUsingFilter(new CompDOB()));
-                    break;
-
-                case 6:
                     outgoingPacket.setCommand("FIND_ALL_SCOUTS");
                     System.out.println(outgoingPacket.writeJSON());
 
@@ -73,18 +50,42 @@ public class ScoutMenu extends Menu {
                     }.getType();
                     getResult(responsePacket);
 
-                    List<Scout> scoutArray = new Gson().fromJson(responsePacket.getObj(), list);
+                    List<Scout> scoutArray = gsonParser.fromJson(responsePacket.getObj(), list);
                     System.out.println(scoutArray);
                     break;
 
-                case 7:
+                case 2:
                     System.out.println("Please enter ID");
                     String idJson = keyboard.next();
                     outgoingPacket.setCommand("FIND_SCOUT_BY_ID " + idJson.toUpperCase());
                     outputCommand(outgoingPacket.writeJSON());
                     getResult(responsePacket);
-                    Scout p = new Gson().fromJson(responsePacket.getObj(), Scout.class);
+                    Scout p = gsonParser.fromJson(responsePacket.getObj(), Scout.class);
                     System.out.println(p);
+                    break;
+
+                case 3:
+                    System.out.println("Please enter ID:");
+                    String deleteid = keyboard.next();
+                    scoutDao.deleteScoutByID(deleteid);
+                    break;
+                case 4:
+                    System.out.println("Please enter name:");
+                    String inputName = keyboard.next();
+                    System.out.println("Please enter birth date (YYYY-MM-DD):");
+                    String inputDOB = keyboard.next();
+
+                    Date date = Date.valueOf(inputDOB);
+
+                    Scout s = new Scout(inputName, date);
+                    scoutDao.insertScout(s);
+                    break;
+                case 5:
+                    System.out.println(scoutDao.findScoutUsingFilter(new CompDOB()));
+                    break;
+
+                case 6:
+                    Client.start();
                     break;
 
 

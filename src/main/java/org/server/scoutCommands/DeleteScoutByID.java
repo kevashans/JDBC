@@ -1,21 +1,22 @@
-package org.server.playerCommands;
+package org.server.scoutCommands;
 
 import org.DAOs.MySqlPlayerDao;
+import org.DAOs.MySqlScoutDao;
 import org.DAOs.PlayerDaoInterface;
+import org.DAOs.ScoutDaoInterface;
 import org.Exceptions.DaoException;
 import org.core.Packet;
 import org.server.Command;
 
-public class DeletePlayerByID implements Command {
+public class DeleteScoutByID implements Command {
     @Override
     public Packet createResponse(Packet incomingPacket) {
-
-        String PlayerID = incomingPacket.getCommand().substring(20);
-        PlayerDaoInterface playerDAO = new MySqlPlayerDao();
+        String ScoutID = incomingPacket.getCommand().substring(20);
+        ScoutDaoInterface scoutDAO = new MySqlScoutDao();
         try
         {
-             playerDAO.initializeID();
-             playerDAO.deletePlayerByID(PlayerID);
+            scoutDAO.initializeID();
+            scoutDAO.deleteScoutByID(ScoutID);
         }catch (DaoException e)
         {
             throw new RuntimeException(e);

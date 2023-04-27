@@ -20,6 +20,7 @@ package org.client;
 
 
 import org.client.menus.PlayerMenu;
+import org.client.menus.ReportMenu;
 import org.client.menus.ScoutMenu;
 
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class Client
         client.start();
     }
 
-    public void start()
+    public static void start()
     {
         Scanner in = new Scanner(System.in);
         try {
@@ -46,8 +47,9 @@ public class Client
 
             System.out.println("Client message: The Client is running and has connected to the server");
 
-            System.out.println("Please enter a command:  (\"Time\" to get time, or \"Echo message\" to get echo) \n>");
-//            String command = in.nextLine();
+            System.out.println("Please select menu: \n1.Player\n2.Scout\n3.Reports");
+            int command = in.nextInt();
+
 
             OutputStream os = socket.getOutputStream();
             PrintWriter socketWriter = new PrintWriter(os, true);   // true => auto flush buffers
@@ -55,10 +57,17 @@ public class Client
 //            socketWriter.println(command);
 
             Scanner socketReader = new Scanner(socket.getInputStream());  // wait for, and retrieve the reply
-//             PlayerMenu menu1 = new PlayerMenu(socketReader,socketWriter);
+            PlayerMenu menu1 = new PlayerMenu(socketReader,socketWriter);
             ScoutMenu menu2 = new ScoutMenu(socketReader,socketWriter);
-//             menu1.setUpPlayerMenu();
-            menu2.setUpScoutMenu();
+            ReportMenu menu3 = new ReportMenu(socketReader,socketWriter);
+            if (command == 1){
+                menu1.setUpPlayerMenu();
+            }else if(command == 2){
+                menu2.setUpScoutMenu();
+            }else if(command ==3){
+                menu3.setUpReportMenu();
+            }
+//
 
             ////SERVER REPLY
 //            if (command.startsWith("FIND_PLAYER_BY_ID"))

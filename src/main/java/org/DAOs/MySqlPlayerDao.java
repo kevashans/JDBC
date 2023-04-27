@@ -133,12 +133,12 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
             System.out.println(resultSet);
         } catch (SQLException e)
         {
-            throw new DaoException( e.getMessage());
+            System.out.println("hello");
+            throw new DaoException(e.getMessage());
         } finally
         {
             closeResourcesNoResultSet(connection, ps);
         }
-//        return usersList;
     }
 
     @Override

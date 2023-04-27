@@ -1,12 +1,14 @@
 package org.client.menus;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import org.Comparator.CompDraftYear;
 import org.DAOs.MySqlPlayerDao;
 import org.DAOs.PlayerDaoInterface;
 import org.DTOs.Player;
 import org.Exceptions.DaoException;
+import org.client.Client;
 import org.core.Packet;
 import org.enums;
 
@@ -18,122 +20,120 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PlayerMenu extends Menu {
+    private final Scanner keyboard;
+    private final PlayerDaoInterface userDao;
+    private final Gson gsonParser;
     public PlayerMenu(Scanner socketReader, PrintWriter socketWriter) {
         super(socketReader, socketWriter);
+        this.keyboard = new Scanner(System.in);
+        this.userDao = new MySqlPlayerDao();
+        this.gsonParser = new Gson();
+        this.userDao.updateId();
     }
 
-    public static void printPlayerOption(){
-        System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Sort by DraftYear\n6. Find all(JSON)\n7. Find by ID (JSON)\n8. Exit");
+    public static void printPlayerOption() {
+        System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Sort by DraftYear\n6. Exit");
     }
 
     public void setUpPlayerMenu() {
         boolean exit = false;
-        Scanner keyboard = new Scanner(System.in);
         System.out.println("Select feature:");
-        PlayerDaoInterface userDao= new MySqlPlayerDao();
-        userDao.updateId();
-
         printPlayerOption();
+
         int input = keyboard.nextInt();
+        String inputID;
+        List<Player> playerArray;
+        Type list;
+
         Packet outgoingPacket = new Packet("", "");
         Packet responsePacket = new Packet("", "");
 
-        try {
-            switch (input) {
-                case 1:
-                    System.out.println(userDao.findAllPlayers());
-                    break;
+try {
+    switch (input) {
+        case 1:
+            outgoingPacket.setCommand("FIND_ALL_PLAYERS");
+            System.out.println(outgoingPacket.writeJSON());
 
-                case 2:
-                    System.out.println("Please enter ID: ");
-                    String inputID = keyboard.next();
-                    System.out.println(userDao.findPlayerByID(inputID));
-                    break;
+            outputCommand(outgoingPacket.writeJSON());
 
-                case 3:
-                    System.out.println("Please enter ID: ");
-                    inputID = keyboard.next();
-                    userDao.deletePlayerByID(inputID);
-                    break;
+            list = new TypeToken<List<Player>>() {
+            }.getType();
+            getResult(responsePacket);
 
-                case 4:
+            playerArray = gsonParser.fromJson(responsePacket.getObj(), list);
+            System.out.println(playerArray);
 
-                    String playerName;
-                    String playerBirthDate;
-                    String position = null;
-                    int draftYear;
+            break;
 
-                    System.out.println("Enter name: ");
-                    playerName = keyboard.next();
-                    System.out.println("Enter DOB (YYYY-MM-DD): ");
-                    playerBirthDate = keyboard.next();
+        case 2:
+            System.out.println("Please enter ID: ");
+            inputID = keyboard.next();
+            outgoingPacket.setCommand("FIND_PLAYER_BY_ID " + inputID.toUpperCase());
+            outputCommand(outgoingPacket.writeJSON());
+            getResult(responsePacket);
+            Player p = gsonParser.fromJson(responsePacket.getObj(), Player.class);
+            System.out.println(p);
 
-                    while (!isInEnum(position, enums.positions.class)) {
-                        System.out.println("Enter position: ");
-                        position = keyboard.next();
-                    }
-                    System.out.println("Enter draft year: ");
-                    draftYear = keyboard.nextInt();
+        case 3:
+            System.out.println("Please enter ID: ");
+            inputID = keyboard.next();
+            outgoingPacket.setCommand("DELETE_PLAYER_BY_ID " + inputID.toUpperCase());
+            outputCommand(outgoingPacket.writeJSON());
+            break;
 
-                    Date date = Date.valueOf(playerBirthDate);
+        case 4:
 
-                    Player inputPlayer = new Player(playerName, date, position, draftYear);
-                    Gson gsonParser = new Gson();
-                    String newPlayerJson = gsonParser.toJson(inputPlayer);
-                    outgoingPacket.setCommand("INSERT_PLAYER");
-                    outgoingPacket.setObj(newPlayerJson);
-                    outputCommand(outgoingPacket.writeJSON());
+            String playerName;
+            String playerBirthDate;
+            String position = null;
+            int draftYear;
 
-                    print();
-                    break;
+            System.out.println("Enter name: ");
+            playerName = keyboard.next();
+            System.out.println("Enter DOB (YYYY-MM-DD): ");
+            playerBirthDate = keyboard.next();
 
-                case 5:
-                    System.out.println(userDao.findPlayerUsingFilter(new CompDraftYear()));
-                    outgoingPacket.setCommand("FIND_PLAYER_USING_FILTER");
-                    break;
-
-                case 6:
-
-                    outgoingPacket.setCommand("FIND_ALL_PLAYERS");
-                    System.out.println(outgoingPacket.writeJSON());
-
-                    outputCommand(outgoingPacket.writeJSON());
-
-                    Type list = new TypeToken<List<Player>>(){}.getType();
-                    getResult(responsePacket);
-
-                    List<Player> playerArray = new Gson().fromJson(responsePacket.getObj(), list);
-                    System.out.println(playerArray);
-
-                    break;
-
-                case 7:
-                    System.out.println("Please enter ID: ");
-                    inputID = keyboard.next();
-                    outgoingPacket.setCommand("FIND_PLAYER_BY_ID " + inputID.toUpperCase());
-                    outputCommand(outgoingPacket.writeJSON());
-                    getResult(responsePacket);
-                    Player p = new Gson().fromJson(responsePacket.getObj(), Player.class);
-                    System.out.println(p);
-                case 8:
-                    print();
-                    exit = true;
-                    break;
-
-                default:
-                    System.out.println("Invalid input. Please try again.");
-                    break;
+            while (!isInEnum(position, enums.positions.class)) {
+                System.out.println("Enter position: ");
+                position = keyboard.next();
             }
-        } catch (DaoException e) {
-            System.err.println("Error: " + e.getMessage());
-        } catch (SQLException e) {
-            System.err.println("Error executing SQL statement: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            System.err.println("Invalid input: " + e.getMessage());
-        } catch (Exception e) {
-            System.err.println("Unknown error: " + e.getMessage());
-            System.out.println(e);
-        }
+            System.out.println("Enter draft year: ");
+            draftYear = keyboard.nextInt();
 
+            Date date = Date.valueOf(playerBirthDate);
+
+            Player inputPlayer = new Player(playerName, date, position, draftYear);
+            String newPlayerJson = gsonParser.toJson(inputPlayer);
+            outgoingPacket.setCommand("INSERT_PLAYER");
+            outgoingPacket.setObj(newPlayerJson);
+            outputCommand(outgoingPacket.writeJSON());
+
+            print();
+            break;
+
+        case 5:
+            outgoingPacket.setCommand("FIND_PLAYER_USING_FILTER");
+            outputCommand(outgoingPacket.writeJSON());
+            list = new TypeToken<List<Player>>() {
+            }.getType();
+            getResult(responsePacket);
+
+            playerArray = gsonParser.fromJson(responsePacket.getObj(), list);
+            System.out.println(playerArray);
+            break;
+
+        case 6:
+            print();
+            Client.start();
+            break;
+
+        default:
+            System.out.println("Invalid input. Please try again.");
+            break;
+    }
+
+} catch (JsonSyntaxException e) {
+    throw new RuntimeException(e);
+}
     }
 }
