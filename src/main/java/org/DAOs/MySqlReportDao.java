@@ -245,6 +245,49 @@ public class MySqlReportDao extends MySqlDao implements ReportDaoInterface {
         return reportsList;
     }
 
+    @Override
+    public List<Report> findReportBySeason(int year) throws DaoException {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        Report p = null;
+        List<Report> reportsList = new ArrayList<>();
+
+
+        try {
+            //Get connection object using the methods in the super class (MySqlDao.java)...
+            connection = this.getConnection();
+
+            String query = "SELECT * FROM `player`,reports WHERE player.playerID=reports.playerID and season= ?";
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, year );
+
+
+            //Using a PreparedStatement to execute SQL...
+
+            resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                String playerId = resultSet.getString("playerID");
+                String scoutId = resultSet.getString("scoutID");
+                int season = resultSet.getInt("season");
+                String positives = resultSet.getString("positives");
+                String negatives = resultSet.getString("negatives");
+                p = new Report(playerId, scoutId, season, positives, negatives);
+
+                reportsList.add(p);
+            }
+            if (p == null) {
+                throw new DaoException("Report with the season " +year+ " not found.");
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e.getMessage());
+        } finally {
+            closeResources(connection, ps, resultSet);
+        }
+
+        return reportsList;
+    }
+
 
     @Override
     public void deleteReportByID(String playerID, String scoutID) throws DaoException {
@@ -341,6 +384,14 @@ public class MySqlReportDao extends MySqlDao implements ReportDaoInterface {
     @Override
     public String findReportByScoutIDJson(String scoutID) throws DaoException {
         List<Report> p = findReportByScoutID(scoutID);
+        Gson gsonParser = new Gson();
+        String json = gsonParser.toJson(p);
+        return json;
+    }
+
+    @Override
+    public String findReportBySeasonJson(int season) throws DaoException {
+        List<Report> p = findReportBySeason(season);
         Gson gsonParser = new Gson();
         String json = gsonParser.toJson(p);
         return json;

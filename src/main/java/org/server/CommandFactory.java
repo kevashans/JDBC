@@ -56,6 +56,8 @@ public class CommandFactory {
                 newCommand = new FindReportByScoutID();
             }else if(command.contains("FIND_REPORT_BY_PLAYER_NAME")){
                 newCommand = new FindReportByPlayerName();
+            }else if(command.contains("FIND_REPORT_BY_SEASON")){
+                newCommand = new FindReportBySeason();
             }
         }
 

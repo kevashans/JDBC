@@ -11,9 +11,10 @@ public class TEST {
 
     ReportDaoInterface reportDao = new MySqlReportDao();
         try {
-//            reportDao.initializeID();
+            reportDao.initializeID();
             System.out.println(reportDao.findReportByScoutID("SC05"));
             System.out.println(reportDao.findReportByPlayerID("PL03"));
+            System.out.println(reportDao.findReportBySeason(2022));
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }

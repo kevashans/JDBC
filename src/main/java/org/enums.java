@@ -29,6 +29,7 @@ public class enums {
         FIND_REPORT_BY_ID,
         FIND_REPORT_BY_PLAYER_ID,
         FIND_REPORT_BY_SCOUT_ID,
-        FIND_REPORT_BY_PLAYER_NAME
+        FIND_REPORT_BY_PLAYER_NAME,
+        FIND_REPORT_BY_SEASON
     }
 }

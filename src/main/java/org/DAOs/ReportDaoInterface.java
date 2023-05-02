@@ -14,6 +14,7 @@ public interface ReportDaoInterface {
     public List<Report> findReportByPlayerID(String playerID) throws DaoException;
     public List<Report> findReportByScoutID( String scoutID) throws DaoException;
     public List<Report> findReportByPlayerName( String name) throws DaoException;
+    public List<Report> findReportBySeason(int season) throws DaoException;
 
     public void  deleteReportByID( String playerID, String scoutID) throws DaoException;
     public void  insertReport(Report reportData) throws DaoException;
@@ -23,5 +24,7 @@ public interface ReportDaoInterface {
     public String findReportByPlayerNameJson(String name) throws DaoException;
 
     public String findReportByScoutIDJson( String scoutID) throws DaoException;
+    public String findReportBySeasonJson(int season) throws DaoException;
+
 
 }
