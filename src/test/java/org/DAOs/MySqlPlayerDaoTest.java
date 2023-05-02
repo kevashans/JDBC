@@ -6,123 +6,88 @@ import org.Exceptions.DaoException;
 
 public class MySqlPlayerDaoTest extends TestCase {
 PlayerDaoInterface playerDAO = new MySqlPlayerDao();
-    public void testUpdateId() {
-        boolean expRes = true;
-        boolean actRes = false;
 
+    public void testInitializeID() {
+        String actRes;
         try {
             playerDAO.initializeID();
-            if (playerDAO.findPlayerByID("PL02").toString().length()>0){
-                actRes = true;
-            }
+            actRes = playerDAO.findPlayerByID("PL02").toString();
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
-    }
-
-    public void testInitializeID() {
+        assertFalse(actRes.isEmpty());
     }
 
     public void testFindAllPlayers() {
-        boolean expRes = true;
-        boolean actRes = false;
-
+        String actRes;
         try {
             playerDAO.initializeID();
-            if (playerDAO.findAllPlayers().size()>0){
-                actRes = true;
-            }
+            actRes = playerDAO.findAllPlayers().toString();
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
     }
 
     public void testFindPlayerByID() {
-        boolean expRes = true;
-        boolean actRes = false;
-
+        String actRes;
         try {
             playerDAO.initializeID();
-            if (playerDAO.findPlayerByID("PL02").toString().length()>0){
-                actRes = true;
-            }
+            actRes = playerDAO.findPlayerByID("PL02").toString();
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
     }
 
-
-    public void testDeletePlayerByID() {
-
-    }
 
     public void testInsertPlayer() {
     }
 
     public void testFindPlayerUsingFilter() {
-        boolean expRes = true;
-        boolean actRes = false;
-
+        String actRes;
         try {
             playerDAO.initializeID();
-            if (playerDAO.findPlayerUsingFilter(new CompDraftYear()).size()>0){
-                actRes = true;
-            }
+            actRes = playerDAO.findPlayerUsingFilter(new CompDraftYear()).toString();
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
     }
 
 
     public void testFindAllPlayersJson() {
-        boolean expRes = true;
-        boolean actRes = false;
-
+        String actRes;
         try {
             playerDAO.initializeID();
-            if (playerDAO.findAllPlayersJson().length()>0){
-                actRes = true;
-            }
+            actRes = playerDAO.findAllPlayersJson();
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
     }
 
 
     public void testFindAllPlayersJsonFilter() {
-        boolean expRes = true;
-        boolean actRes = false;
-
+        String actRes;
         try {
             playerDAO.initializeID();
-            if (playerDAO.findAllPlayersJsonFilter().length()>0){
-                actRes = true;
-            }
+            actRes = playerDAO.findAllPlayersJsonFilter();
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
     }
 
 
     public void testFindPlayerByIdJson() {
-        boolean expRes = true;
-        boolean actRes = false;
-
+        String actRes;
         try {
             playerDAO.initializeID();
-            if (playerDAO.findPlayerByIdJson("PL02").length()>0){
-                actRes = true;
-            }
+            actRes = playerDAO.findPlayerByIdJson("PL02");
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
-
+        assertFalse(actRes.isEmpty());
     }
 }

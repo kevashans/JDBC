@@ -8,6 +8,7 @@ import org.Exceptions.DaoException;
 import java.util.List;
 
 public interface ReportDaoInterface {
+    public void initializeID() throws DaoException;
     public List<Report> findAllReports() throws DaoException;
     public Report findReportByID(String playerID, String scoutID) throws DaoException;
     public List<Report> findReportByPlayerID(String playerID) throws DaoException;

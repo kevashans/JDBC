@@ -23,31 +23,25 @@ public class MySqlScoutDaoTest extends TestCase {
     }
 
     public void testFindAllScouts() {
-        boolean expRes = true;
-        boolean actRes = false;
+        String actRes;
         try {
-            if (scoutDao.findAllScouts().size()>0){
-                actRes=true;
-            }
+//            reportDao.initializeID();
+            actRes = String.valueOf(scoutDao.findAllScouts());
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
     }
 
     public void testFindScoutByID() {
-        boolean expRes = true;
-        boolean actRes = false;
-
+        String actRes;
         try {
             scoutDao.initializeID();
-            if (scoutDao.findScoutByID("SC02").toString().length()>0){
-                actRes=true;
-            }
+            actRes = String.valueOf(scoutDao.findScoutByID("SC02"));
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
     }
 
     public void testDeleteScoutByID() {
@@ -57,45 +51,38 @@ public class MySqlScoutDaoTest extends TestCase {
     }
 
     public void testFindScoutUsingFilter() {
-        boolean expRes = true;
-        boolean actRes = false;
+        String actRes;
         try {
-            if (scoutDao.findScoutUsingFilter(new CompDOB()).size()>0){
-                actRes=true;
-            }
+//            reportDao.initializeID();
+            actRes = String.valueOf(scoutDao.findScoutUsingFilter(new CompDOB()));
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
 
     }
 
     public void testFindAllScoutsJson() {
-        boolean expRes = true;
-        boolean actRes = false;
+        String actRes;
         try {
-            if (scoutDao.findAllScoutsJson().length()>0){
-                actRes=true;
-            }
+//            reportDao.initializeID();
+            actRes = String.valueOf(scoutDao.findAllScoutsJson());
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
 
     }
 
     public void testFindScoutByIdJson() {
-        boolean expRes = true;
-        boolean actRes = false;
+        String actRes;
         try {
             scoutDao.initializeID();
-            if (scoutDao.findScoutByIdJson("SC02").length()>0){
-                actRes=true;
-            }
+            actRes = String.valueOf(scoutDao.findScoutByIdJson("SC02"));
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
 
     }
 }

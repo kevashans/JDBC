@@ -5,41 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0b48e36-c5c5-4071-8b0c-e90a0be0b913" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/DAOs/MySqlPlayerDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/DAOs/MySqlReportDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/DAOs/MySqlScoutDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/server/PlayerCommands/AddNewPlayerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/server/PlayerCommands/FindAllPlayerByIDTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/server/PlayerCommands/FindAllPlayersTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlPlayerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlPlayerDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/PlayerDaoInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/PlayerDaoInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/menus/PlayerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/PlayerMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/menus/ReportMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/ReportMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/menus/ScoutMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/ScoutMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlReportDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlReportDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/ReportDaoInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/ReportDaoInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TEST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TEST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/DeletePlayerByID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/DeletePlayerByID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/FindPlayerUsingFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/FindPlayerUsingFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/insertPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/insertPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindReportByID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindReportByID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindReportByPlayerID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindReportByPlayerID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindReportByPlayerName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindReportByPlayerName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindReportByScoutID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindReportByScoutID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/scoutCommands/DeleteScoutByID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/scoutCommands/DeleteScoutByID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/scoutCommands/FindScoutByID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/scoutCommands/FindScoutByID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/scoutCommands/InsertScout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/scoutCommands/InsertScout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/DAOs/MySqlPlayerDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/DAOs/MySqlPlayerDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/DAOs/PlayerDaoInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/DAOs/PlayerDaoInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/PlayerMenu$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/PlayerMenu$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/ReportMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/ReportMenu$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/ReportMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/ReportMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/ScoutMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/ScoutMenu$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/ScoutMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/ScoutMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/playerMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/playerMenu$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/playerMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/playerMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/DAOs/MySqlPlayerDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/DAOs/MySqlPlayerDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/DAOs/MySqlReportDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/DAOs/MySqlReportDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/DAOs/MySqlScoutDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/DAOs/MySqlScoutDaoTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/example/TEST.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/TEST.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/server/CommandFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/CommandFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/server/playerCommands/FindPlayerUsingFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/playerCommands/FindPlayerUsingFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/server/playerCommands/insertPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/playerCommands/insertPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/org/DAOs/MySqlPlayerDaoTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/org/DAOs/MySqlPlayerDaoTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/org/DAOs/MySqlReportDaoTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/org/DAOs/MySqlReportDaoTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/org/DAOs/MySqlScoutDaoTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/org/DAOs/MySqlScoutDaoTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,8 +30,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="JUnit3 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -97,11 +77,12 @@
       <recent name="junit.framework.TestCase" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.server" />
       <recent name="org.DAOs" />
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.TEST">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.client.Client" />
       <module name="database-sample-1" />
@@ -128,49 +109,46 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MySqlPlayerDaoTest.testFindAllPlayersJson" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TEST" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.TEST" />
       <module name="database-sample-1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.DAOs.*" />
+          <option name="PATTERN" value="org.example.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.DAOs" />
-      <option name="MAIN_CLASS_NAME" value="org.DAOs.MySqlPlayerDaoTest" />
-      <option name="METHOD_NAME" value="testFindAllPlayersJson" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AddNewPlayerTest.testInsert" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="database-sample-1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.server.PlayerCommands.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.server.PlayerCommands" />
+      <option name="MAIN_CLASS_NAME" value="org.server.PlayerCommands.AddNewPlayerTest" />
+      <option name="METHOD_NAME" value="testInsert" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MySqlPlayerDaoTest.testFindAllPlayersJsonFilter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FindAllPlayersTest.testInsert" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="database-sample-1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.DAOs.*" />
+          <option name="PATTERN" value="org.server.PlayerCommands.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.DAOs" />
-      <option name="MAIN_CLASS_NAME" value="org.DAOs.MySqlPlayerDaoTest" />
-      <option name="METHOD_NAME" value="testFindAllPlayersJsonFilter" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MySqlPlayerDaoTest.testFindPlayerByIdJson" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="database-sample-1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.DAOs.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.DAOs" />
-      <option name="MAIN_CLASS_NAME" value="org.DAOs.MySqlPlayerDaoTest" />
-      <option name="METHOD_NAME" value="testFindPlayerByIdJson" />
+      <option name="PACKAGE_NAME" value="org.server.PlayerCommands" />
+      <option name="MAIN_CLASS_NAME" value="org.server.PlayerCommands.FindAllPlayersTest" />
+      <option name="METHOD_NAME" value="testInsert" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -179,17 +157,17 @@
     <list>
       <item itemvalue="Application.Client" />
       <item itemvalue="Application.Server" />
-      <item itemvalue="JUnit.MySqlPlayerDaoTest.testFindAllPlayersJson" />
-      <item itemvalue="JUnit.MySqlPlayerDaoTest.testFindAllPlayersJsonFilter" />
-      <item itemvalue="JUnit.MySqlPlayerDaoTest.testFindPlayerByIdJson" />
+      <item itemvalue="Application.TEST" />
+      <item itemvalue="JUnit.AddNewPlayerTest.testInsert" />
+      <item itemvalue="JUnit.FindAllPlayersTest.testInsert" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TEST" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.Server" />
-        <item itemvalue="JUnit.MySqlPlayerDaoTest.testFindPlayerByIdJson" />
-        <item itemvalue="JUnit.MySqlPlayerDaoTest.testFindAllPlayersJsonFilter" />
-        <item itemvalue="JUnit.MySqlPlayerDaoTest.testFindAllPlayersJson" />
+        <item itemvalue="JUnit.AddNewPlayerTest.testInsert" />
+        <item itemvalue="JUnit.FindAllPlayersTest.testInsert" />
       </list>
     </recent_temporary>
   </component>

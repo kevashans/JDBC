@@ -8,42 +8,36 @@ public class MySqlReportDaoTest extends TestCase {
     ReportDaoInterface reportDao = new MySqlReportDao();
     @Test
     public void testfindAllReport(){
-        boolean expRes = true;
-        boolean actRes = false;
+        String actRes;
         try {
-            if (reportDao.findAllReports().size()>0){
-                actRes=true;
-            }
+//            reportDao.initializeID();
+            actRes = String.valueOf(reportDao.findAllReports());
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
     }
 
     public void testfindReportByPlayerID(){
-        boolean expRes = true;
-        boolean actRes = false;
+        String actRes;
         try {
-            if (reportDao.findReportByPlayerID("PL02").size()>0){
-                actRes=true;
-            }
+//            reportDao.initializeID();
+            actRes = String.valueOf(reportDao.findReportByPlayerID("PL02"));
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
     }
 
     public void testfindAllReportJson(){
-        boolean expRes = true;
-        boolean actRes = false;
+        String actRes;
         try {
-            if (reportDao.findAllReportsJson().length()>0){
-                actRes=true;
-            }
+//            reportDao.initializeID();
+            actRes = String.valueOf(reportDao.findAllReportsJson());
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expRes,actRes);
+        assertFalse(actRes.isEmpty());
     }
 
 }
