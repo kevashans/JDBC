@@ -20,7 +20,7 @@ public class FindScoutByID implements Command {
             existingScout = scoutDao.findScoutByIdJson(ScoutID);
         } catch (DaoException e)
         {
-            throw new RuntimeException(e);
+            System.err.println("Error: " + e.getMessage());
         }
         return new Packet(incomingPacket.getCommand(), existingScout);
     }

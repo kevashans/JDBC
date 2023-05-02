@@ -19,7 +19,7 @@ public class DeleteScoutByID implements Command {
             scoutDAO.deleteScoutByID(ScoutID);
         }catch (DaoException e)
         {
-            throw new RuntimeException(e);
+            System.err.println("Error: " + e.getMessage());
         }
         return incomingPacket;
     }

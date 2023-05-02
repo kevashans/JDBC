@@ -19,7 +19,7 @@ public class FindReportByPlayerName implements Command {
             existingReport = reportDAO.findReportByPlayerNameJson(PlayerName);
         } catch (DaoException e)
         {
-            throw new RuntimeException(e);
+            System.err.println("Error: " + e.getMessage());
         }
         return new Packet(incomingPacket.getCommand(), existingReport);
     }

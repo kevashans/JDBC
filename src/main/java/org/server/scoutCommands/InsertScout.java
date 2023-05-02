@@ -19,6 +19,7 @@ public class InsertScout implements Command {
             scoutDAO.insertScout(insertScout);
         }
         catch (DaoException de) {
+            System.err.println("Error: " + de.getMessage());
 
         }
 

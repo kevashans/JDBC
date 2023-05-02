@@ -18,7 +18,7 @@ public class DeletePlayerByID implements Command {
              playerDAO.deletePlayerByID(PlayerID);
         }catch (DaoException e)
         {
-            throw new RuntimeException(e);
+            System.err.println("Error: " + e.getMessage());
         }
         return incomingPacket;
     }

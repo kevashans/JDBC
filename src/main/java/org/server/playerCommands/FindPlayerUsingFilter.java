@@ -16,7 +16,7 @@ public class FindPlayerUsingFilter implements Command {
         try
         {
             playerDAO.initializeID();
-            existingPlayer = playerDAO.findPlayerUsingFilter(new CompDraftYear()).toString();
+            existingPlayer = playerDAO.findAllPlayersJsonFilter();
         } catch (DaoException e)
         {
             throw new RuntimeException(e);

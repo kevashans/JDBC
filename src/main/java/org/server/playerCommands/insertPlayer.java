@@ -14,14 +14,12 @@ public class insertPlayer implements Command {
         Gson g = new Gson();
         Player insertPlayer = g.fromJson(incomingPacket.getObj(), Player.class);
         PlayerDaoInterface playerDAO= new MySqlPlayerDao();
-
-
         try
         {
             playerDAO.insertPlayer(insertPlayer);
         }
         catch (DaoException de) {
-            throw new RuntimeException(de);
+            System.err.println("Error: " + de.getMessage());
         }
 
         return incomingPacket;

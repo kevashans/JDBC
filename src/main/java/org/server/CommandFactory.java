@@ -2,10 +2,7 @@ package org.server;
 
 import org.core.Utilities;
 import org.enums;
-import org.server.playerCommands.DeletePlayerByID;
-import org.server.playerCommands.FindAllPlayers;
-import org.server.playerCommands.FindPLayerByID;
-import org.server.playerCommands.insertPlayer;
+import org.server.playerCommands.*;
 import org.server.reportCommands.*;
 import org.server.scoutCommands.FindAllScouts;
 import org.server.scoutCommands.FindScoutByID;
@@ -32,7 +29,7 @@ public class CommandFactory {
             } else if (command.contains("INSERT_PLAYER")) {
                 newCommand = new insertPlayer();
             } else if (command.contains("FIND_PLAYER_USING_FILTER")) {
-                newCommand = new FindAllPlayers();
+                newCommand = new FindPlayerUsingFilter();
             }
         }
         else if(Utilities.isInEnum(command, enums.scoutCommands.class)){
@@ -62,40 +59,7 @@ public class CommandFactory {
             }
         }
 
-//        if (command.contains("FIND_PLAYER_BY_ID"))
-//        {
-//            newCommand = new FindPLayerByID();
-//        }else if(command.contains("FIND_ALL_PLAYERS"))
-//        {
-//            newCommand = new FindAllPlayers();
-//        }else if(command.contains("DELETE_PLAYER_BY_ID"))
-//        {
-//            newCommand = new DeletePlayerByID();
-//        }else if(command.contains("FIND_SCOUT_BY_ID"))
-//        {
-//            newCommand = new FindScoutByID();
-//        }else if(command.contains("FIND_ALL_SCOUTS"))
-//        {
-//            newCommand = new FindAllScouts();
-//        }else if(command.contains("FIND_ALL_REPORTS"))
-//        {
-//            newCommand = new FindAllReports();
-//        }else if(command.contains("FIND_REPORT_BY_ID"))
-//        {
-//            newCommand = new FindReportByID();
-//        }else if(command.contains("FIND_REPORT_BY_SCOUT_ID"))
-//        {
-//            newCommand = new FindReportByScoutID();
-//        }else if(command.contains("INSERT_PLAYER"))
-//        {
-//            newCommand = new insertPlayer();
-//        }else if(command.contains("FIND_PLAYER_USING_FILTER"))
-//        {
-//            newCommand = new FindPlayerUsingFilter();
-//        }else if(command.contains("INSERT_SCOUT"))
-//        {
-//            newCommand = new InsertScout();
-//        }
+
 
         return newCommand;
     }

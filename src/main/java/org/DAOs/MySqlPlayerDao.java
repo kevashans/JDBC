@@ -1,5 +1,6 @@
 package org.DAOs;
 
+import org.Comparator.CompDraftYear;
 import org.DTOs.Player;
 import org.Exceptions.DaoException;
 
@@ -216,7 +217,15 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
         List<Player>players = findAllPlayers();
         json = gsonParser.toJson(players);
         return json;
+    }
 
+    @Override
+    public String findAllPlayersJsonFilter() throws DaoException {
+        String json;
+        Gson gsonParser = new Gson();
+        List<Player>players = findPlayerUsingFilter(new CompDraftYear());
+        json = gsonParser.toJson(players);
+        return json;
     }
 
     @Override
@@ -226,6 +235,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
         String json = gsonParser.toJson(p);
         return json;
     }
+
 
 
 }

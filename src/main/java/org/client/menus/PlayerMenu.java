@@ -18,6 +18,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,14 +35,31 @@ public class PlayerMenu extends Menu {
         this.userDao.updateId();
     }
 
+    public static void playerFormatArray(List<Player>playerList){
+        System.out.format("| %-8s | %-20s | %-12s | %-15s | %-24s |%n",
+                "PlayerID", "Name", "DOB", "Position", "Draft year");
+
+        for (int i = 0; i < playerList.size(); i++) {
+            Player p = playerList.get(i);
+            System.out.format("| %-8s | %-20s | %-12s | %-15s | %-24s |%n",
+                    p.getId(), p.getPlayer_name(), p.getDOB(), p.getPosition(), p.getPlayer_draft_year());
+        }
+    }
+    public static void playerFormat(Player p){
+        System.out.format("| %-8s | %-20s | %-12s | %-15s | %-24s |%n",
+                "PlayerID", "Name", "DOB", "Position", "Draft year");
+
+        System.out.format("| %-8s | %-20s | %-12s | %-15s | %-24s |%n",
+                p.getId(), p.getPlayer_name(), p.getDOB(), p.getPosition(), p.getPlayer_draft_year());
+
+    }
+
     public static void printPlayerOption() {
         System.out.println("1. Find all\n2. Find player by ID\n3. Delete player by ID\n4. Add player\n5. Sort by DraftYear\n6. Exit");
     }
 
     public void setUpPlayerMenu() {
         boolean exit = false;
-
-
         int input = 0;
         String inputID;
         List<Player> playerArray;
@@ -51,11 +69,19 @@ public class PlayerMenu extends Menu {
         Packet responsePacket = new Packet("", "");
 
         while (!exit) {
+
             try {
                 System.out.println("Select feature:");
                 printPlayerOption();
-                input = keyboard.nextInt();
+                ////check if user enters anything other than string
+                String inputStr = keyboard.next();
+                if (!inputStr.matches("\\d+")) {
+                    System.out.println("Error! Invalid input. Try again.");
+                    continue;
+                }
+                input = Integer.parseInt(inputStr);
                 switch (input) {
+
                     case 1:
                         outgoingPacket.setCommand("FIND_ALL_PLAYERS");
                         System.out.println(outgoingPacket.writeJSON());
@@ -67,7 +93,7 @@ public class PlayerMenu extends Menu {
                         getResult(responsePacket);
 
                         playerArray = gsonParser.fromJson(responsePacket.getObj(), list);
-                        System.out.println(playerArray);
+                        playerFormatArray(playerArray);
                         break;
 
                     case 2:
@@ -77,7 +103,7 @@ public class PlayerMenu extends Menu {
                         outputCommand(outgoingPacket.writeJSON());
                         getResult(responsePacket);
                         Player p = gsonParser.fromJson(responsePacket.getObj(), Player.class);
-                        System.out.println(p);
+                        playerFormat(p);
                         break;
 
                     case 3:
@@ -126,6 +152,7 @@ public class PlayerMenu extends Menu {
 
                         playerArray = gsonParser.fromJson(responsePacket.getObj(), list);
                         System.out.println(playerArray);
+                        playerFormatArray(playerArray);
                         break;
 
                     case 6:
@@ -143,6 +170,8 @@ public class PlayerMenu extends Menu {
                 System.err.println("No data found");
             }catch (JSONException e) {
                 System.err.println("No data found");
+            }catch (InputMismatchException e) {
+                System.out.println("Error! Invalid integer. Try again.");
             }
         }
     }

@@ -19,7 +19,7 @@ public class FindReportByScoutID implements Command {
             existingReport = reportDAO.findReportByScoutIDJson(ScoutID);
         } catch (DaoException e)
         {
-            throw new RuntimeException(e);
+            System.err.println("Error: " + e.getMessage());
         }
         return new Packet(incomingPacket.getCommand(), existingReport);
     }
