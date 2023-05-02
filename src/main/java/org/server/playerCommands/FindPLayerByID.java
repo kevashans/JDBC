@@ -20,7 +20,7 @@ public class FindPLayerByID implements Command {
             existingPlayer = playerDAO.findPlayerByIdJson(PlayerID);
         } catch (DaoException e)
         {
-            throw new RuntimeException(e);
+            System.err.println("Error: " + e.getMessage());
         }
         return new Packet(incomingPacket.getCommand(), existingPlayer);
 

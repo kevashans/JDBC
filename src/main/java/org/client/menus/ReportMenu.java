@@ -42,6 +42,7 @@ public class ReportMenu extends Menu{
         }.getType();
         List<Report> reportArray;
         System.out.println("select feature");
+        printReportOptions();
         int input1 = keyboard.nextInt();
         try{
         switch (input1) {

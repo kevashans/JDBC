@@ -7,10 +7,12 @@ import org.Comparator.CompDraftYear;
 import org.DAOs.MySqlPlayerDao;
 import org.DAOs.PlayerDaoInterface;
 import org.DTOs.Player;
+import org.DTOs.Scout;
 import org.Exceptions.DaoException;
 import org.client.Client;
 import org.core.Packet;
 import org.enums;
+import org.json.JSONException;
 
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
@@ -23,6 +25,7 @@ public class PlayerMenu extends Menu {
     private final Scanner keyboard;
     private final PlayerDaoInterface userDao;
     private final Gson gsonParser;
+
     public PlayerMenu(Scanner socketReader, PrintWriter socketWriter) {
         super(socketReader, socketWriter);
         this.keyboard = new Scanner(System.in);
@@ -37,10 +40,9 @@ public class PlayerMenu extends Menu {
 
     public void setUpPlayerMenu() {
         boolean exit = false;
-        System.out.println("Select feature:");
-        printPlayerOption();
 
-        int input = keyboard.nextInt();
+
+        int input = 0;
         String inputID;
         List<Player> playerArray;
         Type list;
@@ -48,92 +50,100 @@ public class PlayerMenu extends Menu {
         Packet outgoingPacket = new Packet("", "");
         Packet responsePacket = new Packet("", "");
 
-try {
-    switch (input) {
-        case 1:
-            outgoingPacket.setCommand("FIND_ALL_PLAYERS");
-            System.out.println(outgoingPacket.writeJSON());
+        while (!exit) {
+            try {
+                System.out.println("Select feature:");
+                printPlayerOption();
+                input = keyboard.nextInt();
+                switch (input) {
+                    case 1:
+                        outgoingPacket.setCommand("FIND_ALL_PLAYERS");
+                        System.out.println(outgoingPacket.writeJSON());
 
-            outputCommand(outgoingPacket.writeJSON());
+                        outputCommand(outgoingPacket.writeJSON());
 
-            list = new TypeToken<List<Player>>() {
-            }.getType();
-            getResult(responsePacket);
+                        list = new TypeToken<List<Player>>() {
+                        }.getType();
+                        getResult(responsePacket);
 
-            playerArray = gsonParser.fromJson(responsePacket.getObj(), list);
-            System.out.println(playerArray);
+                        playerArray = gsonParser.fromJson(responsePacket.getObj(), list);
+                        System.out.println(playerArray);
+                        break;
 
-            break;
+                    case 2:
+                        System.out.println("Please enter ID: ");
+                        inputID = keyboard.next();
+                        outgoingPacket.setCommand("FIND_PLAYER_BY_ID " + inputID.toUpperCase());
+                        outputCommand(outgoingPacket.writeJSON());
+                        getResult(responsePacket);
+                        Player p = gsonParser.fromJson(responsePacket.getObj(), Player.class);
+                        System.out.println(p);
+                        break;
 
-        case 2:
-            System.out.println("Please enter ID: ");
-            inputID = keyboard.next();
-            outgoingPacket.setCommand("FIND_PLAYER_BY_ID " + inputID.toUpperCase());
-            outputCommand(outgoingPacket.writeJSON());
-            getResult(responsePacket);
-            Player p = gsonParser.fromJson(responsePacket.getObj(), Player.class);
-            System.out.println(p);
+                    case 3:
+                        System.out.println("Please enter ID: ");
+                        inputID = keyboard.next();
+                        outgoingPacket.setCommand("DELETE_PLAYER_BY_ID " + inputID.toUpperCase());
+                        outputCommand(outgoingPacket.writeJSON());
+                        break;
 
-        case 3:
-            System.out.println("Please enter ID: ");
-            inputID = keyboard.next();
-            outgoingPacket.setCommand("DELETE_PLAYER_BY_ID " + inputID.toUpperCase());
-            outputCommand(outgoingPacket.writeJSON());
-            break;
+                    case 4:
 
-        case 4:
+                        String playerName;
+                        String playerBirthDate;
+                        String position = null;
+                        int draftYear;
 
-            String playerName;
-            String playerBirthDate;
-            String position = null;
-            int draftYear;
+                        System.out.println("Enter name: ");
+                        playerName = keyboard.next();
+                        System.out.println("Enter DOB (YYYY-MM-DD): ");
+                        playerBirthDate = keyboard.next();
 
-            System.out.println("Enter name: ");
-            playerName = keyboard.next();
-            System.out.println("Enter DOB (YYYY-MM-DD): ");
-            playerBirthDate = keyboard.next();
+                        while (!isInEnum(position, enums.positions.class)) {
+                            System.out.println("Enter position: ");
+                            position = keyboard.next();
+                        }
+                        System.out.println("Enter draft year: ");
+                        draftYear = keyboard.nextInt();
 
-            while (!isInEnum(position, enums.positions.class)) {
-                System.out.println("Enter position: ");
-                position = keyboard.next();
+                        Date date = Date.valueOf(playerBirthDate);
+
+                        Player inputPlayer = new Player(playerName, date, position, draftYear);
+                        String newPlayerJson = gsonParser.toJson(inputPlayer);
+                        outgoingPacket.setCommand("INSERT_PLAYER");
+                        outgoingPacket.setObj(newPlayerJson);
+                        outputCommand(outgoingPacket.writeJSON());
+
+                        print();
+                        break;
+
+                    case 5:
+                        outgoingPacket.setCommand("FIND_PLAYER_USING_FILTER");
+                        outputCommand(outgoingPacket.writeJSON());
+                        list = new TypeToken<List<Player>>() {
+                        }.getType();
+                        getResult(responsePacket);
+
+                        playerArray = gsonParser.fromJson(responsePacket.getObj(), list);
+                        System.out.println(playerArray);
+                        break;
+
+                    case 6:
+                        print();
+                        Client.start();
+                        exit = true;
+                        break;
+
+                    default:
+                        System.out.println("Invalid input. Please try again.");
+                        break;
+                }
+
+            } catch (JsonSyntaxException e) {
+                System.err.println("No data found");
+            }catch (JSONException e) {
+                System.err.println("No data found");
             }
-            System.out.println("Enter draft year: ");
-            draftYear = keyboard.nextInt();
-
-            Date date = Date.valueOf(playerBirthDate);
-
-            Player inputPlayer = new Player(playerName, date, position, draftYear);
-            String newPlayerJson = gsonParser.toJson(inputPlayer);
-            outgoingPacket.setCommand("INSERT_PLAYER");
-            outgoingPacket.setObj(newPlayerJson);
-            outputCommand(outgoingPacket.writeJSON());
-
-            print();
-            break;
-
-        case 5:
-            outgoingPacket.setCommand("FIND_PLAYER_USING_FILTER");
-            outputCommand(outgoingPacket.writeJSON());
-            list = new TypeToken<List<Player>>() {
-            }.getType();
-            getResult(responsePacket);
-
-            playerArray = gsonParser.fromJson(responsePacket.getObj(), list);
-            System.out.println(playerArray);
-            break;
-
-        case 6:
-            print();
-            Client.start();
-            break;
-
-        default:
-            System.out.println("Invalid input. Please try again.");
-            break;
-    }
-
-} catch (JsonSyntaxException e) {
-    throw new RuntimeException(e);
-}
+        }
     }
 }

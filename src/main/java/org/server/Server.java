@@ -39,6 +39,7 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.sql.SQLOutput;
 import java.time.LocalTime;
 import java.util.Scanner;
@@ -108,56 +109,43 @@ public class Server {
         @Override
         public void run() {
             String message;
-            Packet incomingPacket = new Packet(null, null);
+            Packet incomingPacket = new Packet("", null);
             Packet response = null;
 
             try {
+            while (!incomingPacket.getCommand().equals("QUIT")) {
 
-//                message = socketReader.readLine();
+                    incomingPacket.readJson(new JSONObject(socketReader.readLine()));
+                    System.out.println("Received message " + incomingPacket);
 
-//                if (message.equals("TEST")) {
-//                    socketWriter.println("HALO");
-//                } else {
-//                    incomingPacket.setCommand(message);
-//                    System.out.println("message_received " + message);
-//                    CommandFactory factory = new CommandFactory();
-//                    Command command = factory.createCommand(incomingPacket.getCommand());
-//                    System.out.println(command);
-//
-//                    if (command != null) {
-//                        response = command.createResponse(incomingPacket);
-//                    }
-//                    socketWriter.println(response.getObj());
-//                }
-////                    socketWriter.println("nothing");
-//
-//
+                    CommandFactory factory = new CommandFactory();
+                    socketWriter.println(incomingPacket.getCommand());
+                    Command command = factory.createCommand(incomingPacket.getCommand());
+                    if (command != null) {
+                        response = command.createResponse(incomingPacket);
+                    }
+                    socketWriter.println(response.writeJSON());
+                    socketWriter.flush();
 
 
+//                    socket.close();
 
-                        incomingPacket.readJson(new JSONObject(socketReader.readLine()));
-//                        System.out.println("message_received " + incomingPacket);
-                        CommandFactory factory = new CommandFactory();
-                        socketWriter.println(incomingPacket.getCommand());
-                        Command command = factory.createCommand(incomingPacket.getCommand());
-//                        System.out.println(command);
-
-                        if (command != null) {
-                            response = command.createResponse(incomingPacket);
-                        }
-                        socketWriter.println(response.writeJSON());
-                        socketWriter.flush();
-
-
-
-                socket.close();
-
-
+                }
+            }
+            catch (SocketException ex) {
+                System.out.println("Server: (ClientHandler): SocketException for Client " + clientNumber + ": " + ex.getMessage());
             } catch (IOException ex) {
                 ex.printStackTrace();
+            } finally {
+                try {
+                    socket.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
             System.out.println("Server: (ClientHandler): Handler for Client " + clientNumber + " is terminating .....");
         }
-    }
 
+    }
 }
+

@@ -5,41 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0b48e36-c5c5-4071-8b0c-e90a0be0b913" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/ReportMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/core/Utilities.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/reportCommands/FindReportByPlayerName.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/scoutCommands/DeleteScoutByID.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/scoutCommands/FindScoutUsingFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/server/scoutCommands/InsertScout.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/idTracker.txt" beforeDir="false" afterPath="$PROJECT_DIR$/idTracker.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlPlayerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlPlayerDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlReportDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/MySqlReportDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/DAOs/ReportDaoInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/DAOs/ReportDaoInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/menus/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/client/menus/PlayerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/PlayerMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/client/menus/ReportMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/ReportMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/client/menus/ScoutMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/client/menus/ScoutMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/enums.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/enums.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TEST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TEST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/CommandFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/DeletePlayerByID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/DeletePlayerByID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/insertPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/insertPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/DAOs/MySqlDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/DAOs/MySqlDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/DAOs/MySqlPlayerDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/DAOs/MySqlPlayerDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/DAOs/MySqlReportDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/DAOs/MySqlReportDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/DAOs/ReportDaoInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/DAOs/ReportDaoInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/ScoutMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/ScoutMenu$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/ScoutMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/ScoutMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/playerMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/playerMenu$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/client/menus/playerMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/client/menus/playerMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/enums.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/enums.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/TEST.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/TEST.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/server/CommandFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/CommandFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/server/playerCommands/DeletePlayerByID.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/playerCommands/DeletePlayerByID.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/server/playerCommands/insertPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/server/playerCommands/insertPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/FindPLayerByID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/server/playerCommands/FindPLayerByID.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,9 +132,9 @@
       <list>
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.App" />
         <item itemvalue="Application.TEST" />
         <item itemvalue="JUnit.org.server in database-sample-1" />
-        <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
   </component>
@@ -178,7 +150,7 @@
     <servers />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/JDBC$Server.ic" NAME="Server Coverage Results" MODIFIED="1682271525309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/JDBC$Server.ic" NAME="Server Coverage Results" MODIFIED="1683022662450" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.server.playerCommands.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/JDBC$Client.ic" NAME="Client Coverage Results" MODIFIED="1682184714712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -36,7 +36,7 @@ public class ScoutMenu extends Menu {
 
         System.out.println("select feature");
 
-        System.out.println("1. Find all scouts\n2. Find scout by ID\n3. Delete scout by ID\n4. Insert scout\n5. Sort by DOB)\n7. Exit");
+        System.out.println("1. Find all scouts\n2. Find scout by ID\n3. Delete scout by ID\n4. Insert scout\n5. Sort by DOB)\n6. Exit");
         int input1 = keyboard.nextInt();
         try {
             switch (input1) {
