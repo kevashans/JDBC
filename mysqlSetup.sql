@@ -46,3 +46,11 @@ BEGIN
   SET NEW.scoutID = CONCAT('SC', LPAD(LAST_INSERT_ID(), 2, '0'));
 END$$
 DELIMITER ;
+
+CREATE TABLE `team` (
+  `teamID` varchar(20) NOT NULL,
+  `team_name` varchar(50) NOT NULL,
+  `team_salary` int(30) NOT NULL,
+  PRIMARY KEY (`teamID`)
+)
+

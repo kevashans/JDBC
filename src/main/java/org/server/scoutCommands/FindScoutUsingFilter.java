@@ -16,7 +16,7 @@ public class FindScoutUsingFilter implements Command {
         try
         {
             scoutDao.initializeID();
-            existingScout = scoutDao.findScoutUsingFilter(new CompDOB()).toString();
+            existingScout = scoutDao.findScoutUsingFilterJson();
         } catch (DaoException e)
         {
             throw new RuntimeException(e);

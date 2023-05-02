@@ -36,10 +36,13 @@ public class ScoutMenu extends Menu {
         Packet outgoingPacket = new Packet("", "");
         Packet responsePacket = new Packet("", "");
         boolean exit = false;
+        List<Scout> scoutArray;
+        Type list = new TypeToken<List<Scout>>() {
+        }.getType();
 
         while (exit == false) {
             System.out.println("select feature");
-            System.out.println("1. Find all scouts\n2. Find scout by ID\n3. Delete scout by ID\n4. Insert scout\n5. Sort by DOB)\n6. Exit");
+            System.out.println("1. Find all scouts\n2. Find scout by ID\n3. Delete scout by ID\n4. Insert scout\n5. Sort by DOB\n6. Exit");
             int input1 = 0;
 
             String inputStr = keyboard.next();
@@ -57,11 +60,10 @@ public class ScoutMenu extends Menu {
 
                         outputCommand(outgoingPacket.writeJSON());
 
-                        Type list = new TypeToken<List<Scout>>() {
-                        }.getType();
+
                         getResult(responsePacket);
 
-                        List<Scout> scoutArray = gsonParser.fromJson(responsePacket.getObj(), list);
+                        scoutArray = gsonParser.fromJson(responsePacket.getObj(), list);
                         System.out.println(scoutArray);
                         break;
 
@@ -92,7 +94,16 @@ public class ScoutMenu extends Menu {
                         scoutDao.insertScout(s);
                         break;
                     case 5:
-                        System.out.println(scoutDao.findScoutUsingFilter(new CompDOB()));
+                        outgoingPacket.setCommand("FIND_SCOUT_USING_FILTER");
+                        System.out.println(outgoingPacket.writeJSON());
+
+                        outputCommand(outgoingPacket.writeJSON());
+
+
+                        getResult(responsePacket);
+
+                        scoutArray = gsonParser.fromJson(responsePacket.getObj(), list);
+                        System.out.println(scoutArray);
                         break;
 
                     case 6:
