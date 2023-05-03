@@ -22,6 +22,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
 
     public void updateId(){
         ArrayList<Integer> ids = readIds();
+        ////get id 0 because player id is inserted into index 0 at "readID" function inside "MySqlDao"
         if (ids.get(0)!= null){
             Player.setIdCount(ids.get(0));
         }
@@ -119,7 +120,6 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
         PreparedStatement ps = null;
         int resultSet =0;
         List<Player> usersList = new ArrayList<>();
-
 
         try
         {

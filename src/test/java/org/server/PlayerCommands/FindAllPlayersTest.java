@@ -7,6 +7,7 @@ import org.DAOs.PlayerDaoInterface;
 import org.DTOs.Player;
 import org.Exceptions.DaoException;
 import org.core.Packet;
+import org.junit.Test;
 import org.server.Command;
 import org.server.playerCommands.FindPLayerByID;
 
@@ -17,7 +18,7 @@ public class FindAllPlayersTest extends TestCase {
     PlayerDaoInterface playerDao = new MySqlPlayerDao();
     Command command = new FindPLayerByID();
     Gson gsonParser = new Gson();
-
+@Test
     public void testInsert() {
 
         String playerID = "PL02";
@@ -32,7 +33,7 @@ public class FindAllPlayersTest extends TestCase {
 
         String expectedPacketString = String.valueOf(expectedPacket.getObj());
 
-        Packet incomingPacket = new Packet("FIND_PLAYER_BY_ID PL02", playerID);
+        Packet incomingPacket = new Packet("FIND_PLAYER_BY_IDPL02", playerID);
         Packet actualPacket = command.createResponse(incomingPacket);
         String actualPacketString = String.valueOf(actualPacket.getObj());
 

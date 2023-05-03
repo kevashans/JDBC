@@ -148,7 +148,18 @@ public class PlayerMenu extends Menu {
                             position = keyboard.nextLine();
                         }
                         System.out.println("Enter draft year: ");
-                        draftYear = Integer.valueOf(keyboard.nextLine());
+                        draftYear = 0;
+                        while (draftYear <= 0) {
+                            System.out.println("Please enter a positive year:");
+                            try {
+                                draftYear = Integer.parseInt(keyboard.nextLine());
+                                if (draftYear <= 0) {
+                                    System.out.println("Year must be a positive integer.");
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Year must be a positive integer.");
+                            }
+                        }
 
 //                        Date date = Date.valueOf(playerBirthDate);
 

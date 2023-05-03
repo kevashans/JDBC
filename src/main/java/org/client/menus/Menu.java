@@ -29,12 +29,13 @@ public abstract class Menu {
 
     public void outputCommand(JSONObject jo)
     {
+        ////transfer json string of a packet into the server
         getSocketWriter().println(jo);
         getSocketWriter().flush();
     }
     public void getResult(Packet responsePacket)
     {
-//        System.out.println(getSocketReader().nextLine());
+        ////read json from the server and insert its data into the responsePacket
         responsePacket.readJson(new JSONObject(getSocketReader().nextLine()));
     }
     public static <E extends Enum<E>> boolean isInEnum(String value, Class<E> enumClass) {
@@ -44,6 +45,7 @@ public abstract class Menu {
         return false;
     }
     public static void print(){
+        ////print last inserted ID of an object if using java generated ID
         PrintWriter printer = null;
         try {
             printer = new PrintWriter(new File("idTracker.txt"));
@@ -53,18 +55,6 @@ public abstract class Menu {
         printer.print(Player.getIdCount());
         printer.close();
     }
-//    public static void startingMenu(){
-//        System.out.println("Please select menu: \n1.Player\n2.Scout\n3.Reports");
-//        Scanner in = new Scanner(System.in);
-//        int command = in.nextInt();
-//        PlayerMenu menu1 = new PlayerMenu(this.getSocketReader(),socketWriter);
-//        ScoutMenu menu2 = new ScoutMenu(socketReader,socketWriter);
-//        if (command ==1) {
-//            menu1.setUpPlayerMenu();
-//        }else if(command==2){
-//            menu2.setUpScoutMenu();
-//        }
-//    }
 
 
 }

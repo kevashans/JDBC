@@ -78,7 +78,7 @@ public class ReportMenu extends Menu {
             printReportOptions();
 
 
-            String inputStr = keyboard.next();
+            String inputStr = keyboard.nextLine();
             if (!inputStr.matches("\\d+")) {
                 System.out.println("Error! Invalid input. Try again.");
                 continue;
@@ -150,8 +150,18 @@ public class ReportMenu extends Menu {
                         reportFormatArray(reportArray);
                         break;
                     case 6:
-                        System.out.println("Please enter year:");
-                        inputYear= keyboard.nextInt();
+                        inputYear = 0;
+                        while (inputYear <= 0) {
+                            System.out.println("Please enter a positive year:");
+                            try {
+                                inputYear = Integer.parseInt(keyboard.nextLine());
+                                if (inputYear <= 0) {
+                                    System.out.println("Year must be a positive integer.");
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Year must be a positive integer.");
+                            }
+                        }
 
                         outgoingPacket.setCommand(ReportCommands.FIND_REPORT_BY_SEASON.toString()+ inputYear);
                         outputCommand(outgoingPacket.writeJSON());

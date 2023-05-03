@@ -63,7 +63,6 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet resultSet = null;
-//        List<Player> usersList = new ArrayList<>();
         Scout s = null;
         if (this.ids.contains(scoutID)){
             try
@@ -107,9 +106,8 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
     public int deleteScoutByID(String scoutID) throws DaoException {
         Connection connection = null;
         PreparedStatement ps = null;
-//        ResultSet resultSet = null;
         int resultSet =0;
-//        List<Scout> usersList = new ArrayList<>();
+
 
 
         try
@@ -147,11 +145,8 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
 
             String query = "insert into scout(scout_name,scout_birth_date) values(?,?)";
             ps = connection.prepareStatement(query);
-//            ps.setString(1, playerData.getId());
             ps.setString(1, playerData.getScout_name());
             ps.setString(2, playerData.getDOB());
-//            ps.setString(4, playerData.getPosition());
-//            ps.setString(5, String.valueOf(playerData.getPlayer_draft_year()));
 
             //Using a PreparedStatement to execute SQL...
             resultSet = ps.executeUpdate();

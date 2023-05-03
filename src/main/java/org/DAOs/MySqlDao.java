@@ -100,19 +100,25 @@ public class MySqlDao {
         }
     }
     public static ArrayList<Integer> readIds(){
+        //// made and structured in the case that there will be multiple objects that uses java generated IDS
         File inputFile = new File("idTracker.txt");
         ArrayList<Integer> IDs = new ArrayList<>();
         Scanner file;
         int playerID = 0;
+        ////int exampleID = 1
         try {
             file = new Scanner(inputFile);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+
         while (file.hasNext()) {
             playerID = file.nextInt();
+            ///exampleId = file.nextInt();
         }
+        ////player ID will be index 0 in the list
         IDs.add(0,playerID);
+        ////IDS.add(1,exampleID)
         return IDs;
     }
 

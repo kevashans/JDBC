@@ -72,6 +72,8 @@ public class Client {
                     socketWriter.flush();
                     System.out.println("CLOSING");
                     exit = true;
+                }else{
+                    System.out.println("invalid input");
                 }
             }
 
