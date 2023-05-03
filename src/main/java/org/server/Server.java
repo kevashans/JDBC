@@ -111,37 +111,36 @@ public class Server {
             String message;
             Packet incomingPacket = new Packet("", null);
             Packet response = null;
+            boolean run = true;
 
             try {
             while (!incomingPacket.getCommand().equals("QUIT")) {
-
+                    ////packet data from the client in the form of json is read into the "incoming packet"
                     incomingPacket.readJson(new JSONObject(socketReader.readLine()));
                     System.out.println("Received message " + incomingPacket);
 
                     CommandFactory factory = new CommandFactory();
-                    socketWriter.println(incomingPacket.getCommand());
+                    ////show what command the server will exceute
+//                    socketWriter.println(incomingPacket.getCommand());
+                    ////create command object
                     Command command = factory.createCommand(incomingPacket.getCommand());
                     if (command != null) {
+                        ///execute command
                         response = command.createResponse(incomingPacket);
                     }
+                    ////transfer data to the client in the form of jsonstring
+                    if (response != null){
                     socketWriter.println(response.writeJSON());
+                    }
                     socketWriter.flush();
 
-
-//                    socket.close();
-
                 }
+                socket.close();
             }
             catch (SocketException ex) {
                 System.out.println("Server: (ClientHandler): SocketException for Client " + clientNumber + ": " + ex.getMessage());
             } catch (IOException ex) {
                 ex.printStackTrace();
-            } finally {
-                try {
-                    socket.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
             }
             System.out.println("Server: (ClientHandler): Handler for Client " + clientNumber + " is terminating .....");
         }

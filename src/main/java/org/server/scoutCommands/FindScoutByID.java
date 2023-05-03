@@ -11,7 +11,7 @@ public class FindScoutByID implements Command {
     @Override
     public Packet createResponse(Packet incomingPacket) {
         String existingScout = null;
-        String ScoutID = incomingPacket.getCommand().substring(17);
+        String ScoutID = incomingPacket.getCommand().substring(16);
         ScoutDaoInterface scoutDao= new MySqlScoutDao();
 
         try

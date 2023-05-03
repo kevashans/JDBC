@@ -1,25 +1,25 @@
-package org.server.playerCommands;
+package org.server.reportCommands;
 
 import com.google.gson.Gson;
-import org.DAOs.MySqlPlayerDao;
-import org.DAOs.PlayerDaoInterface;
+import org.DAOs.MySqlReportDao;
+import org.DAOs.ReportDaoInterface;
 import org.DTOs.Player;
+import org.DTOs.Report;
 import org.Exceptions.DaoException;
 import org.core.Packet;
 import org.server.Command;
 
-public class insertPlayer implements Command {
+public class InsertReport implements Command {
     @Override
     public Packet createResponse(Packet incomingPacket) {
         Gson g = new Gson();
-        Player insertPlayer = g.fromJson(incomingPacket.getObj(), Player.class);
-        PlayerDaoInterface playerDAO= new MySqlPlayerDao();
+        Report insertReport = g.fromJson(incomingPacket.getObj(), Report.class);
+        ReportDaoInterface reportDAO= new MySqlReportDao();
         int success=0;
-
         try
         {
-            if(playerDAO.insertPlayer(insertPlayer)==1){
-                success =1;
+            if(reportDAO.insertReport(insertReport)==1){
+                success = 1;
             }
         }
         catch (DaoException de) {

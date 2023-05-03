@@ -3,36 +3,32 @@ package org.client.menus;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import org.Comparator.CompDraftYear;
 import org.DAOs.MySqlPlayerDao;
 import org.DAOs.PlayerDaoInterface;
 import org.DTOs.Player;
-import org.DTOs.Scout;
-import org.Exceptions.DaoException;
 import org.client.Client;
 import org.core.Packet;
-import org.enums;
+import org.enums.*;
 import org.json.JSONException;
 
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class PlayerMenu extends Menu {
     private final Scanner keyboard;
-    private final PlayerDaoInterface userDao;
+    private final PlayerDaoInterface playerDao;
     private final Gson gsonParser;
 
     public PlayerMenu(Scanner socketReader, PrintWriter socketWriter) {
         super(socketReader, socketWriter);
         this.keyboard = new Scanner(System.in);
-        this.userDao = new MySqlPlayerDao();
+        this.playerDao = new MySqlPlayerDao();
         this.gsonParser = new Gson();
-        this.userDao.updateId();
+        this.playerDao.updateId();
     }
 
     public static void playerFormatArray(List<Player>playerList){
@@ -61,20 +57,27 @@ public class PlayerMenu extends Menu {
     public void setUpPlayerMenu() {
         boolean exit = false;
         int input = 0;
-        String inputID;
-        List<Player> playerArray;
-        Type list;
 
-        Packet outgoingPacket = new Packet("", "");
-        Packet responsePacket = new Packet("", "");
+
 
         while (!exit) {
+            Packet outgoingPacket = new Packet("", "");
+            Packet responsePacket = new Packet("", "");
+            String inputID;
+            List<Player> playerArray;
+            Type list;
+            String playerName;
+            String playerBirthDate = null;
+            String position = null;
+            int draftYear;
+            Date date = null;
+
 
             try {
                 System.out.println("Select feature:");
                 printPlayerOption();
                 ////check if user enters anything other than string
-                String inputStr = keyboard.next();
+                String inputStr = keyboard.nextLine();
                 if (!inputStr.matches("\\d+")) {
                     System.out.println("Error! Invalid input. Try again.");
                     continue;
@@ -83,7 +86,7 @@ public class PlayerMenu extends Menu {
                 switch (input) {
 
                     case 1:
-                        outgoingPacket.setCommand("FIND_ALL_PLAYERS");
+                        outgoingPacket.setCommand(PlayerCommands.FIND_ALL_PLAYERS.toString());
                         System.out.println(outgoingPacket.writeJSON());
 
                         outputCommand(outgoingPacket.writeJSON());
@@ -98,8 +101,8 @@ public class PlayerMenu extends Menu {
 
                     case 2:
                         System.out.println("Please enter ID: ");
-                        inputID = keyboard.next();
-                        outgoingPacket.setCommand("FIND_PLAYER_BY_ID " + inputID.toUpperCase());
+                        inputID = keyboard.nextLine();
+                        outgoingPacket.setCommand(PlayerCommands.FIND_PLAYER_BY_ID + inputID.toUpperCase());
                         outputCommand(outgoingPacket.writeJSON());
                         getResult(responsePacket);
                         Player p = gsonParser.fromJson(responsePacket.getObj(), Player.class);
@@ -108,43 +111,65 @@ public class PlayerMenu extends Menu {
 
                     case 3:
                         System.out.println("Please enter ID: ");
-                        inputID = keyboard.next();
-                        outgoingPacket.setCommand("DELETE_PLAYER_BY_ID " + inputID.toUpperCase());
+                        inputID = keyboard.nextLine();
+                        outgoingPacket.setCommand(PlayerCommands.DELETE_PLAYER_BY_ID + inputID.toUpperCase());
                         outputCommand(outgoingPacket.writeJSON());
+                        getResult(responsePacket);
+
+                        if(Integer.valueOf(responsePacket.getObj()) == 1){
+                        System.out.println("DELETED");
+                        }else{
+                            System.err.println(inputID + " not found");
+                        }
+
                         break;
 
                     case 4:
 
-                        String playerName;
-                        String playerBirthDate;
-                        String position = null;
-                        int draftYear;
-
                         System.out.println("Enter name: ");
-                        playerName = keyboard.next();
-                        System.out.println("Enter DOB (YYYY-MM-DD): ");
-                        playerBirthDate = keyboard.next();
+                        playerName = keyboard.nextLine();
 
-                        while (!isInEnum(position, enums.positions.class)) {
+//                        System.out.println("Enter DOB (YYYY-MM-DD): ");
+                        boolean validDate = false;
+
+                        while (!validDate) {
+                            try {
+                                System.out.println("Enter DOB (YYYY-MM-DD): ");
+                                playerBirthDate = keyboard.nextLine();
+                                 date = Date.valueOf(playerBirthDate);
+                                validDate = true;
+                            } catch (IllegalArgumentException e) {
+                                System.err.println("Invalid date format. Please enter the date in the format YYYY-MM-DD.");
+                            }
+                        }
+
+                        while (!isInEnum(position, Positions.class)) {
                             System.out.println("Enter position: ");
-                            position = keyboard.next();
+                            position = keyboard.nextLine();
                         }
                         System.out.println("Enter draft year: ");
-                        draftYear = keyboard.nextInt();
+                        draftYear = Integer.valueOf(keyboard.nextLine());
 
-                        Date date = Date.valueOf(playerBirthDate);
+//                        Date date = Date.valueOf(playerBirthDate);
 
                         Player inputPlayer = new Player(playerName, date, position, draftYear);
                         String newPlayerJson = gsonParser.toJson(inputPlayer);
-                        outgoingPacket.setCommand("INSERT_PLAYER");
+                        outgoingPacket.setCommand(PlayerCommands.INSERT_PLAYER.toString());
                         outgoingPacket.setObj(newPlayerJson);
                         outputCommand(outgoingPacket.writeJSON());
+                        getResult(responsePacket);
+
+                        if(Integer.valueOf(responsePacket.getObj()) == 1){
+                            System.out.println("Inserted");
+                        }else{
+                            System.err.println("Insert fail");
+                        }
 
                         print();
                         break;
 
                     case 5:
-                        outgoingPacket.setCommand("FIND_PLAYER_USING_FILTER");
+                        outgoingPacket.setCommand(String.valueOf(PlayerCommands.FIND_PLAYER_USING_FILTER));
                         outputCommand(outgoingPacket.writeJSON());
                         list = new TypeToken<List<Player>>() {
                         }.getType();

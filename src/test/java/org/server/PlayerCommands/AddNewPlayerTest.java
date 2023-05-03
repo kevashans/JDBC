@@ -25,11 +25,11 @@ public class AddNewPlayerTest extends TestCase {
         Player newPlayer = new Player("PL100", "JunitTest", Date.valueOf("2003-03-22"), "C", 35);
         String newPlayerJson= gsonParser.toJson(newPlayer);
 
-        Packet expectedPacket = new Packet(enums.playerCommands.INSERT_PLAYER.toString(), newPlayerJson);
+        Packet expectedPacket = new Packet(enums.PlayerCommands.INSERT_PLAYER.toString(), newPlayerJson);
 
         String expectedPacketString = String.valueOf(expectedPacket);
 
-        Packet incomingPacket = new Packet(enums.playerCommands.INSERT_PLAYER.toString(), newPlayerJson);
+        Packet incomingPacket = new Packet(enums.PlayerCommands.INSERT_PLAYER.toString(), newPlayerJson);
         Packet actualPacket = command.createResponse(incomingPacket);
         String actualPacketString = String.valueOf(actualPacket);
 

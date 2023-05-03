@@ -11,7 +11,7 @@ public class FindReportByID implements Command
     public Packet createResponse(Packet incomingPacket)
     {
         String existingReport = null;
-        String IDS = incomingPacket.getCommand().substring(18);
+        String IDS = incomingPacket.getCommand().substring(17);
         String[] tokens = IDS.split("[,]");
         String PlayerID = tokens[0];
         String ScoutID = tokens[1];
@@ -19,7 +19,7 @@ public class FindReportByID implements Command
 
         try
         {
-
+            reportDAO.initializeID();
             existingReport = reportDAO.findReportByIdJson(PlayerID,ScoutID);
         } catch (DaoException e)
         {

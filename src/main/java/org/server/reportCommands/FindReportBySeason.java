@@ -11,7 +11,7 @@ public class FindReportBySeason implements Command {
     public Packet createResponse(Packet incomingPacket) {
 
         String existingReport = null;
-        String year = incomingPacket.getCommand().substring(22);
+        String year = incomingPacket.getCommand().substring(21);
         System.out.println("year: " + year);
         ReportDaoInterface reportDAO= new MySqlReportDao();
 

@@ -1,6 +1,5 @@
 package org.DAOs;
 
-import com.google.gson.JsonObject;
 import org.Comparator.CompDOB;
 import org.DTOs.Player;
 import org.DTOs.Scout;
@@ -105,7 +104,7 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
     }
 
     @Override
-    public void deleteScoutByID(String scoutID) throws DaoException {
+    public int deleteScoutByID(String scoutID) throws DaoException {
         Connection connection = null;
         PreparedStatement ps = null;
 //        ResultSet resultSet = null;
@@ -132,11 +131,11 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
         {
             closeResourcesNoResultSet(connection, ps);
         }
-//        return usersList;
+        return resultSet;
     }
 
     @Override
-    public void insertScout(Scout playerData) throws DaoException {
+    public int insertScout(Scout playerData) throws DaoException {
         Connection connection = null;
         PreparedStatement ps = null;
         int resultSet =0;
@@ -164,6 +163,7 @@ public class MySqlScoutDao extends MySqlDao implements  ScoutDaoInterface {
         {
             closeResourcesNoResultSet(connection, ps);
         }
+        return resultSet;
 
     }
 

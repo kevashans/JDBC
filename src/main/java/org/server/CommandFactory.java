@@ -4,10 +4,7 @@ import org.core.Utilities;
 import org.enums;
 import org.server.playerCommands.*;
 import org.server.reportCommands.*;
-import org.server.scoutCommands.FindAllScouts;
-import org.server.scoutCommands.FindScoutByID;
-import org.server.scoutCommands.FindScoutUsingFilter;
-import org.server.scoutCommands.InsertScout;
+import org.server.scoutCommands.*;
 
 
 public class CommandFactory {
@@ -18,7 +15,7 @@ public class CommandFactory {
 
     public Command createCommand(String command) {
         Command newCommand = null;
-        if (Utilities.isInEnum(command, enums.playerCommands.class)) {
+        if (Utilities.isInEnum(command, enums.PlayerCommands.class)) {
 
             if (command.contains("FIND_PLAYER_BY_ID")) {
                 newCommand = new FindPLayerByID();
@@ -32,7 +29,7 @@ public class CommandFactory {
                 newCommand = new FindPlayerUsingFilter();
             }
         }
-        else if(Utilities.isInEnum(command, enums.scoutCommands.class)){
+        else if(Utilities.isInEnum(command, enums.ScoutCommands.class)){
             if(command.contains("FIND_SCOUT_BY_ID")){
                 newCommand = new FindScoutByID();
             }else if(command.contains("FIND_ALL_SCOUTS")){
@@ -43,9 +40,11 @@ public class CommandFactory {
                 newCommand = new FindScoutUsingFilter();
             }else if(command.contains("FIND_ALL_SCOUTS")){
                 newCommand = new FindAllScouts();
+            }else if(command.contains("DELETE_SCOUT_BY_ID")){
+                newCommand = new DeleteScoutByID();
             }
         }
-        else if(Utilities.isInEnum(command,enums.reportCommands.class)){
+        else if(Utilities.isInEnum(command, enums.ReportCommands.class)){
             if (command.contains("FIND_ALL_REPORTS")){
                 newCommand = new FindAllReports();
             }else if(command.contains("FIND_REPORT_BY_ID")){
@@ -58,6 +57,8 @@ public class CommandFactory {
                 newCommand = new FindReportByPlayerName();
             }else if(command.contains("FIND_REPORT_BY_SEASON")){
                 newCommand = new FindReportBySeason();
+            }else if(command.contains("INSERT_REPORT")){
+                newCommand = new InsertReport();
             }
         }
 

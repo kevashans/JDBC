@@ -16,6 +16,9 @@ import com.google.gson.Gson;
 public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
     private HashSet<String> ids = new HashSet<>();
 
+    public HashSet<String> getIds() {
+        return ids;
+    }
 
     public void updateId(){
         ArrayList<Integer> ids = readIds();
@@ -69,7 +72,6 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet resultSet = null;
-//        List<Player> usersList = new ArrayList<>();
         Player p = null;
         if (this.ids.contains(playerID)){
         try
@@ -112,10 +114,9 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
     }
 
     @Override
-    public void deletePlayerByID(String playerID) throws DaoException {
+    public int deletePlayerByID(String playerID) throws DaoException {
         Connection connection = null;
         PreparedStatement ps = null;
-//        ResultSet resultSet = null;
         int resultSet =0;
         List<Player> usersList = new ArrayList<>();
 
@@ -140,10 +141,11 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
         {
             closeResourcesNoResultSet(connection, ps);
         }
+        return resultSet;
     }
 
     @Override
-    public void insertPlayer(Player playerData) throws DaoException {
+    public int insertPlayer(Player playerData) throws DaoException {
         Connection connection = null;
         PreparedStatement ps = null;
         int resultSet =0;
@@ -171,7 +173,7 @@ public class MySqlPlayerDao extends MySqlDao implements  PlayerDaoInterface {
         {
             closeResourcesNoResultSet(connection, ps);
         }
-
+return resultSet;
     }
 
     @Override

@@ -11,7 +11,7 @@ public class FindPLayerByID implements Command {
     public Packet createResponse(Packet incomingPacket)
     {
         String existingPlayer = null;
-        String PlayerID = incomingPacket.getCommand().substring(18);
+        String PlayerID = incomingPacket.getCommand().substring(17);
         PlayerDaoInterface playerDAO= new MySqlPlayerDao();
 
         try

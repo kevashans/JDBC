@@ -98,7 +98,7 @@ public class App {
                             System.out.println("Enter DOB (YYYY-MM-DD): ");
                             playerBirthDate = keyboard.next();
 
-                            while (!isInEnum(position, enums.positions.class)) {
+                            while (!isInEnum(position, enums.Positions.class)) {
                                 System.out.println("Enter position: ");
                                 position = keyboard.next();
                             }

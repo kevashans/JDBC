@@ -1,7 +1,5 @@
 package org.client.menus;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.DTOs.Player;
 import org.core.Packet;
 import org.json.JSONObject;
@@ -36,7 +34,7 @@ public abstract class Menu {
     }
     public void getResult(Packet responsePacket)
     {
-        System.out.println(getSocketReader().nextLine());
+//        System.out.println(getSocketReader().nextLine());
         responsePacket.readJson(new JSONObject(getSocketReader().nextLine()));
     }
     public static <E extends Enum<E>> boolean isInEnum(String value, Class<E> enumClass) {

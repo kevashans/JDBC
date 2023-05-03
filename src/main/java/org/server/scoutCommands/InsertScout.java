@@ -14,15 +14,18 @@ public class InsertScout implements Command {
         Gson g = new Gson();
         Scout insertScout = g.fromJson(incomingPacket.getObj(), Scout.class);
         ScoutDaoInterface scoutDAO= new MySqlScoutDao();
+        int success=0;
         try
         {
-            scoutDAO.insertScout(insertScout);
+            if(scoutDAO.insertScout(insertScout)==1){
+                success=1;
+            }
         }
         catch (DaoException de) {
             System.err.println("Error: " + de.getMessage());
 
         }
 
-        return incomingPacket;
+        return new Packet(incomingPacket.getCommand(), String.valueOf(success));
     }
 }

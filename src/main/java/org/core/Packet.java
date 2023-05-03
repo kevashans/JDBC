@@ -26,6 +26,7 @@ public class Packet {
 
     public JSONObject writeJSON()
     {
+        ////convert packet into a json string
         JSONObject jo = new JSONObject();
         jo.put("command", this.command);
         jo.put("payload", this.obj);
@@ -33,6 +34,7 @@ public class Packet {
     }
 
     public void readJson(JSONObject jo){
+        ////read json information into a packet
         this.setCommand(String.valueOf(jo.get("command")));
         this.setObj(String.valueOf(jo.get("payload")));
     }

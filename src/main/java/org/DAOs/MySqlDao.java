@@ -60,13 +60,16 @@ public class MySqlDao {
 
     public void closeResources(Connection connection, PreparedStatement ps, ResultSet resultSet) throws DaoException {
         try {
-            if (resultSet != null) {
+            if (resultSet != null)
+            {
                 resultSet.close();
             }
-            if (ps != null) {
+            if (ps != null)
+            {
                 ps.close();
             }
-            if (connection != null) {
+            if (connection != null)
+            {
                 freeConnection(connection);
             }
         } catch (SQLException e) {

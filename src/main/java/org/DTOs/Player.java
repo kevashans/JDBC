@@ -2,7 +2,7 @@ package org.DTOs;
 
 import java.sql.Date;
 
-public class Player {
+public class Player{
     private String id;
     private String player_name;
     private Date DOB;

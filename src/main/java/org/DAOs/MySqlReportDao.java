@@ -3,7 +3,6 @@ package org.DAOs;
 import com.google.gson.Gson;
 import org.DTOs.Player;
 import org.DTOs.Report;
-import org.DTOs.Scout;
 import org.Exceptions.DaoException;
 
 import java.sql.*;
@@ -16,6 +15,18 @@ public class MySqlReportDao extends MySqlDao implements ReportDaoInterface {
     private final HashSet<String> reportIds = new HashSet<>();
     private final HashSet<String> playerIds = new HashSet<>();
     private final HashSet<String> scoutIds = new HashSet<>();
+
+    public HashSet<String> getReportIds() {
+        return reportIds;
+    }
+
+    public HashSet<String> getPlayerIds() {
+        return playerIds;
+    }
+
+    public HashSet<String> getScoutIds() {
+        return scoutIds;
+    }
 
     public void initializeID() throws DaoException {
         List<Report> reports = findAllReports();
@@ -318,7 +329,7 @@ public class MySqlReportDao extends MySqlDao implements ReportDaoInterface {
     }
 
     @Override
-    public void insertReport(Report reportData) throws DaoException {
+    public int insertReport(Report reportData) throws DaoException {
         Connection connection = null;
         PreparedStatement ps = null;
         int resultSet = 0;
@@ -343,6 +354,7 @@ public class MySqlReportDao extends MySqlDao implements ReportDaoInterface {
         } finally {
             closeResourcesNoResultSet(connection, ps);
         }
+        return resultSet;
 
     }
 

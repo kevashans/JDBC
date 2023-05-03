@@ -23,6 +23,7 @@ package org.client;
 import org.client.menus.PlayerMenu;
 import org.client.menus.ReportMenu;
 import org.client.menus.ScoutMenu;
+import org.core.Packet;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -42,10 +43,7 @@ public class Client {
         int command;
         try {
             Socket socket = new Socket("localhost", 8080);  // connect to server socket
-//            System.out.println("Client: Port# of this client : " + socket.getLocalPort());
-//            System.out.println("Client: Port# of Server :" + socket.getPort());
-//
-//            System.out.println("Client message: The Client is running and has connected to the server");
+
 
             System.out.println("Please select menu: \n1.Player\n2.Scout\n3.Reports");
 
@@ -53,13 +51,12 @@ public class Client {
             OutputStream os = socket.getOutputStream();
             PrintWriter socketWriter = new PrintWriter(os, true);   // true => auto flush buffers
 
-//            socketWriter.println(command);
-
             Scanner socketReader = new Scanner(socket.getInputStream());  // wait for, and retrieve the reply
             PlayerMenu menu1 = new PlayerMenu(socketReader, socketWriter);
             ScoutMenu menu2 = new ScoutMenu(socketReader, socketWriter);
             ReportMenu menu3 = new ReportMenu(socketReader, socketWriter);
 
+            ////menu setup
             while (!exit) {
                 command = in.nextInt();
                 if (command == 1) {
@@ -69,7 +66,11 @@ public class Client {
                 } else if (command == 3) {
                     menu3.setUpReportMenu();
                 } else if (command == 4) {
-                    socketWriter.println("QUIT");
+                    Packet outgoingPacket = new Packet("QUIT", "");
+
+                    socketWriter.println(outgoingPacket.writeJSON());
+                    socketWriter.flush();
+                    System.out.println("CLOSING");
                     exit = true;
                 }
             }

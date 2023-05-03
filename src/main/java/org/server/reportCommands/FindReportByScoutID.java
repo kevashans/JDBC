@@ -10,12 +10,12 @@ public class FindReportByScoutID implements Command {
     @Override
     public Packet createResponse(Packet incomingPacket) {
         String existingReport = null;
-        String ScoutID = incomingPacket.getCommand().substring(24);
+        String ScoutID = incomingPacket.getCommand().substring(23);
         ReportDaoInterface reportDAO= new MySqlReportDao();
 
         try
         {
-
+            reportDAO.initializeID();
             existingReport = reportDAO.findReportByScoutIDJson(ScoutID);
         } catch (DaoException e)
         {

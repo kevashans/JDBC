@@ -1,7 +1,7 @@
 package org;
 
 public class enums {
-    public enum positions {
+    public enum Positions {
         PG,
         C,
         PF,
@@ -9,7 +9,7 @@ public class enums {
         SG
     }
 
-    public enum playerCommands {
+    public enum PlayerCommands {
         FIND_ALL_PLAYERS,
         FIND_PLAYER_BY_ID,
         DELETE_PLAYER_BY_ID,
@@ -17,19 +17,20 @@ public class enums {
         FIND_PLAYER_USING_FILTER;
     }
 
-    public enum scoutCommands{
+    public enum ScoutCommands {
         FIND_ALL_SCOUTS,
         FIND_SCOUT_BY_ID,
         DELETE_SCOUT_BY_ID,
         INSERT_SCOUT,
         FIND_SCOUT_USING_FILTER
     }
-    public enum reportCommands{
+    public enum ReportCommands {
         FIND_ALL_REPORTS,
         FIND_REPORT_BY_ID,
         FIND_REPORT_BY_PLAYER_ID,
         FIND_REPORT_BY_SCOUT_ID,
         FIND_REPORT_BY_PLAYER_NAME,
-        FIND_REPORT_BY_SEASON
+        FIND_REPORT_BY_SEASON,
+        INSERT_REPORT
     }
 }
