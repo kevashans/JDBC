@@ -45,7 +45,7 @@ public class Client {
             Socket socket = new Socket("localhost", 8080);  // connect to server socket
 
 
-            System.out.println("Please select menu: \n1.Player\n2.Scout\n3.Reports");
+            System.out.println("Please select menu: \n1.Player\n2.Scout\n3.Reports\n4.Exit");
 
 
             OutputStream os = socket.getOutputStream();

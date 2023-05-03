@@ -10,6 +10,7 @@ public class FindAllPlayers implements Command {
     @Override
     public Packet createResponse(Packet incomingPacket)
     {
+        ////returns list of all players in json string inside the package payload
         String existingPlayer = null;
         PlayerDaoInterface playerDAO= new MySqlPlayerDao();
 

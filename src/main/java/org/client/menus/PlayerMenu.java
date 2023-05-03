@@ -86,15 +86,18 @@ public class PlayerMenu extends Menu {
                 switch (input) {
 
                     case 1:
+                        ////insert command into the packet
                         outgoingPacket.setCommand(PlayerCommands.FIND_ALL_PLAYERS.toString());
                         System.out.println(outgoingPacket.writeJSON());
-
+                        ////send to server the packet in json string form
                         outputCommand(outgoingPacket.writeJSON());
 
                         list = new TypeToken<List<Player>>() {
                         }.getType();
+                        ////get data from server and insert it to responsePacket
                         getResult(responsePacket);
 
+                        ////transform result into a java object
                         playerArray = gsonParser.fromJson(responsePacket.getObj(), list);
                         playerFormatArray(playerArray);
                         break;
@@ -129,9 +132,8 @@ public class PlayerMenu extends Menu {
                         System.out.println("Enter name: ");
                         playerName = keyboard.nextLine();
 
-//                        System.out.println("Enter DOB (YYYY-MM-DD): ");
                         boolean validDate = false;
-
+///checl for valid date
                         while (!validDate) {
                             try {
                                 System.out.println("Enter DOB (YYYY-MM-DD): ");
@@ -142,7 +144,7 @@ public class PlayerMenu extends Menu {
                                 System.err.println("Invalid date format. Please enter the date in the format YYYY-MM-DD.");
                             }
                         }
-
+////check if position is according to enum
                         while (!isInEnum(position, Positions.class)) {
                             System.out.println("Enter position: ");
                             position = keyboard.nextLine();
@@ -161,13 +163,17 @@ public class PlayerMenu extends Menu {
                             }
                         }
 
-//                        Date date = Date.valueOf(playerBirthDate);
 
                         Player inputPlayer = new Player(playerName, date, position, draftYear);
+                        ////turn new player object into json string
                         String newPlayerJson = gsonParser.toJson(inputPlayer);
+                        ////set the command an object for the packet to be sent to the server
                         outgoingPacket.setCommand(PlayerCommands.INSERT_PLAYER.toString());
                         outgoingPacket.setObj(newPlayerJson);
+                        ////transfer packet to server
                         outputCommand(outgoingPacket.writeJSON());
+
+                        ////get result and insert it to responsePacket
                         getResult(responsePacket);
 
                         if(Integer.valueOf(responsePacket.getObj()) == 1){

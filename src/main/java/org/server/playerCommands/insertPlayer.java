@@ -12,6 +12,7 @@ public class insertPlayer implements Command {
     @Override
     public Packet createResponse(Packet incomingPacket) {
         Gson g = new Gson();
+        ////read object inside the packet (in the form of json string) and transform it into a java object
         Player insertPlayer = g.fromJson(incomingPacket.getObj(), Player.class);
         PlayerDaoInterface playerDAO= new MySqlPlayerDao();
         int success=0;
@@ -19,7 +20,7 @@ public class insertPlayer implements Command {
         try
         {
             if(playerDAO.insertPlayer(insertPlayer)==1){
-                success =1;
+
             }
         }
         catch (DaoException de) {

@@ -12,6 +12,7 @@ public class FindReportByID implements Command
     {
         String existingReport = null;
         String IDS = incomingPacket.getCommand().substring(17);
+        ////read tokens after the command(FIND_REPORT_BY_ID token1, token2)
         String[] tokens = IDS.split("[,]");
         String PlayerID = tokens[0];
         String ScoutID = tokens[1];
